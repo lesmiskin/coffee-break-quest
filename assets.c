@@ -77,7 +77,18 @@ void shutdownAssets(void) {
 static void loadImages(void) {
     //Define assets to be loaded.
     AssetDef definitions[] = {
-        { "scene.png" }
+        { "scene.png" },
+        { "font-00.png" },
+        { "font-01.png" },
+        { "font-02.png" },
+        { "font-03.png" },
+        { "font-04.png" },
+        { "font-05.png" },
+        { "font-06.png" },
+        { "font-07.png" },
+        { "font-08.png" },
+        { "font-09.png" },
+        { "font-x.png" },
     };
 
     //Infer asset path from current directory.

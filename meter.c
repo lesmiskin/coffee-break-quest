@@ -1,6 +1,38 @@
+#include "common.h"
+#include "assets.h"
+#include "input.h"
+
 double alertness;
 double hygiene;
-double progress;
 double alertness;
 double work;
 double bladder;
+
+double timeRate;
+double timeProgress;
+
+const double MAX_SPEED = 60;
+const double TIME_INC = 0.1;
+const double SPEED_INC = 2;
+const double TIME_END = 480;
+
+void speedup() {
+	if(timeRate + SPEED_INC > MAX_SPEED) return;
+	timeRate += SPEED_INC;
+	play("up.wav");
+}
+
+void slowdown() {
+	if(timeRate - SPEED_INC < SPEED_INC) return;
+	timeRate -= SPEED_INC;
+	play("down.wav");
+}
+
+void meterGameFrame(void) {
+	//Quit game once time is up.
+	if(timeProgress >= TIME_END) quit();
+	timeProgress += (SPEED_INC * timeRate);
+
+	if (checkCommand(CMD_GAME_SLOWDOWN)) slowdown();
+	if (checkCommand(CMD_GAME_SPEEDUP)) speedup();
+}

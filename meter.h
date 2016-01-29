@@ -1,11 +1,6 @@
 #ifndef METER_H
 #define METER_H
 
-extern double alertness;
-extern double hygiene;
-extern double progress;
-extern double alertness;
-extern double work;
-extern double bladder;
+extern void meterGameFrame(void);
 
 #endif

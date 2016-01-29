@@ -1,5 +1,6 @@
 #include <assert.h>
 #include "renderer.h"
+#include "assets.h"
 
 SDL_Texture *renderBuffer;
 SDL_Renderer *renderer = NULL;
@@ -22,6 +23,11 @@ Sprite makeSprite(SDL_Texture *texture, Coord offset, SDL_RendererFlip flip) {
             texture, offset, getTextureSize(texture), flip
     };
     return sprite;
+}
+
+Sprite makeSimpleSprite(char *textureName) {
+	SDL_Texture *texture = getTexture(textureName);
+	return makeSprite(texture, zeroCoord(), SDL_FLIP_NONE);
 }
 
 void drawSprite(Sprite sprite, Coord origin) {

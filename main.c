@@ -8,13 +8,12 @@
 #include "scene.h"
 #include "mysdl.h"
 #include "player.h"
+#include "meter.h"
 
-//TODO: Drink key does something (e.g. triggers a sound).
-//TODO: Break key does something (e.g. triggers a different sound).
 //TODO: Up key triggers sound and decreases speed of game.
 //TODO: Up key triggers sound and increases speed of game.
 
-static const char *GAME_TITLE = "Mouse Quest";
+static const char *GAME_TITLE = "Coffee Break Quest";
 const int ANIMATION_HZ = 1000 / 12;		//12fps
 const int RENDER_HZ = 1000 / 60;		//60fps
 const int GAME_HZ = 1000 / 60;			//60fps
@@ -71,6 +70,7 @@ int main()  {
     initWindow();
     initRenderer();
     initAssets();
+//	initHud();
 
     long lastRenderFrameTime = clock();
     long lastGameFrameTime = lastRenderFrameTime;
@@ -84,6 +84,7 @@ int main()  {
         if(timer(&lastGameFrameTime, GAME_HZ)) {
             pollInput();
             playerGameFrame();
+			meterGameFrame();
             processSystemCommands();
         }
 
@@ -96,10 +97,6 @@ int main()  {
         if(timer(&lastRenderFrameTime, RENDER_HZ)) {
             sceneRenderFrame();
             updateCanvas();
-
-//            SDL_SetRenderDrawColor(renderer, 255, 0, 0, 0);
-//            SDL_RenderClear(renderer);
-//            SDL_RenderPresent(renderer);
         }
     }
 

@@ -21,6 +21,6 @@ extern void shutdownRenderer();
 extern void updateCanvas();
 extern void drawSprite(Sprite sprite, Coord origin);
 extern Coord getTextureSize(SDL_Texture *texture);
-extern Sprite makeSprite(SDL_Texture *texture, Coord offset, SDL_RendererFlip flip);
+extern Sprite makeSimpleSprite(char *textureName);
 
 #endif
