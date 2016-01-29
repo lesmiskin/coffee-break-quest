@@ -1,0 +1,32 @@
+Scene: Player is working in office.
+Scene: Player 'evacuates'.
+Scene: Player visits bathroom.
+
+Meter: Hygene.
+Meter: Progress throughout the day.
+Meter: Promotion or Fired.
+Meter: Bladder capacity.
+Meter: Alertness.
+
+Action: Drink coffee.
+Action: Visit bathroom.
+
+If you do nothing:
+	- Alertness decreases.
+	- Productivity decreases to Fired.
+If you drink a coffee:
+	- Alertness increases.
+	- Bladder increases.
+If you use the bathroom:
+	- Bladder decreases.
+	- Productivity decreases.
+	- Time increments.
+If you don't use the bathroom:
+	- (Player evacuates)
+	- Hygene decreases.
+	- Productivity decreases.
+
+MINIGAMES (Occurs in bonus situations)
+- Combat with collegues at work, piss-based.
+- Player is drunk in bar, so has trouble aiming.
+- Splashback(?)
