@@ -5,8 +5,8 @@
 #include "input.h"
 #include "assets.h"
 #include "renderer.h"
+#include "scene.h"
 #include "mysdl.h"
-
 
 //TODO: Show placeholder background when game starts up.
 //TODO: Drink key does something (e.g. triggers a sound).
@@ -94,9 +94,12 @@ int main()  {
         //Renderer frame
         double renderFPS;
         if(timer(&lastRenderFrameTime, RENDER_HZ)) {
-            SDL_SetRenderDrawColor(renderer, 255, 0, 0, 0);
-            SDL_RenderClear(renderer);
-            SDL_RenderPresent(renderer);
+            sceneRenderFrame();
+            updateCanvas();
+
+//            SDL_SetRenderDrawColor(renderer, 255, 0, 0, 0);
+//            SDL_RenderClear(renderer);
+//            SDL_RenderPresent(renderer);
         }
     }
 

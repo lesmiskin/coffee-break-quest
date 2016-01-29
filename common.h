@@ -11,6 +11,7 @@ typedef struct {
 extern SDL_Window *window;
 extern bool running;
 extern Coord makeCoord(double x, double y);
+extern Coord zeroCoord();
 extern bool timer(long *lastTime, double hertz);
 extern bool isDue(long now, long lastTime, double hertz);
 extern void fatalError(const char *title, const char *message);

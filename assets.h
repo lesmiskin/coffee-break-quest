@@ -19,5 +19,6 @@ extern Asset getAsset(char *path);
 extern void shutdownAssets(void);
 extern SoundAsset getSound(char *path);
 extern void play(char* path);
+extern SDL_Texture *getTexture(char *path);
 
 #endif

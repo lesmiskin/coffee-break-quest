@@ -10,7 +10,24 @@ static const double PIXEL_SCALE = 1;				//pixel doubling for assets.
 Coord pixelGrid;								//helps aligning things to the tiled background.
 Coord screenBounds;
 
-void drawSpriteAbsRotated2(Sprite sprite, Coord origin, double angle, double scale) {
+Coord getTextureSize(SDL_Texture *texture) {
+    int x, y;
+    SDL_QueryTexture(texture, NULL, NULL, &x, &y);
+
+    return makeCoord(x, y);
+}
+
+Sprite makeSprite(SDL_Texture *texture, Coord offset, SDL_RendererFlip flip) {
+    Sprite sprite = {
+            texture, offset, getTextureSize(texture), flip
+    };
+    return sprite;
+}
+
+void drawSprite(Sprite sprite, Coord origin) {
+    double scale = 1;
+    double angle = 0;
+
     //Ensure we're always calling this with an initialised sprite_t.
     assert(sprite.texture != NULL);
 
@@ -84,3 +101,19 @@ void shutdownRenderer(void) {
     renderer = NULL;
 }
 
+void updateCanvas(void) {
+    //Change rendering target to window.
+    SDL_SetRenderTarget(renderer, NULL);
+
+    //Activate scaler, and blit the buffer to the screen.
+    SDL_RenderSetLogicalSize(renderer, pixelGrid.x, pixelGrid.y);
+    SDL_RenderCopy(renderer, renderBuffer, NULL, NULL);
+
+    //Actually update the screen itself.
+//	SDL_RenderClear(renderer);
+    SDL_RenderPresent(renderer);
+//	SDL_UpdateWindowSurface(window);
+
+    //Reset render target back to texture buffer
+    SDL_SetRenderTarget(renderer, renderBuffer);
+}

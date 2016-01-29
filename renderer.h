@@ -4,6 +4,13 @@
 #include "mysdl.h"
 #include "common.h"
 
+typedef struct {
+    SDL_Texture *texture;
+    Coord offset;
+    Coord size;
+    SDL_RendererFlip flip;
+} Sprite;
+
 extern SDL_Renderer *renderer;
 extern SDL_Texture *renderBuffer;
 extern Coord screenBounds;
@@ -11,12 +18,9 @@ extern Coord pixelGrid;
 extern Coord screenBounds;
 extern void initRenderer();
 extern void shutdownRenderer();
-
-typedef struct {
-    SDL_Texture *texture;
-    Coord offset;
-    Coord size;
-    SDL_RendererFlip flip;
-} Sprite;
+extern void updateCanvas();
+extern void drawSprite(Sprite sprite, Coord origin);
+extern Coord getTextureSize(SDL_Texture *texture);
+extern Sprite makeSprite(SDL_Texture *texture, Coord offset, SDL_RendererFlip flip);
 
 #endif
