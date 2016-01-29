@@ -43,7 +43,11 @@ void pollInput(void) {
     if(keysHeld[SDL_SCANCODE_D])
         commands[CMD_PLAYER_DRINK] = true;
     if(keysHeld[SDL_SCANCODE_B])
-        commands[CMD_PLAYER_BATHROOM] = true;
+        commands[CMD_PLAYER_BREAK] = true;
+    if(keysHeld[SDL_SCANCODE_UP])
+        commands[CMD_GAME_SPEEDUP] = true;
+    if(keysHeld[SDL_SCANCODE_DOWN])
+        commands[CMD_GAME_SLOWDOWN] = true;
 }
 
 void processSystemCommands(void) {
