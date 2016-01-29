@@ -59,12 +59,13 @@ void hudRenderFrame(void) {
 	writeText(bladder, makeCoord(10, 50));
 	writeText(timeProgress, makeCoord(10, 70));
 
+	//Draw plumes.
 	if(plume.origin.x > 0) {
 		if(timer(&plume.spawnTime, 500)) {
 			plume.origin.x = 0;
 			return;
 		}else{
-			Sprite sprite = makeSimpleSprite("drink.png");
+			Sprite sprite = makeSimpleSprite(plume.type == PLUME_BREAK ? "break.png" : "drink.png");
 			drawSprite(sprite, makeCoord(screenBounds.x/2, plume.origin.y));
 		}
 	}

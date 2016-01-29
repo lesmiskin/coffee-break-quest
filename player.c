@@ -10,6 +10,7 @@ void drink(void) {
 
 void takeBreak(void) {
 	play("break.wav");
+	spawnPlume(PLUME_BREAK);
 }
 
 void playerGameFrame(void) {
