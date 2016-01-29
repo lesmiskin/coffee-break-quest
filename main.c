@@ -91,6 +91,7 @@ int main()  {
 
 		//Animation frame
 		if(timer(&lastAnimFrameTime, ANIMATION_HZ)) {
+			sceneAnimateFrame();
 		}
 
         //Renderer frame

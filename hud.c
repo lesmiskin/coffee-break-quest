@@ -1,3 +1,4 @@
+#include "meter.h"
 #include "hud.h"
 #include "renderer.h"
 
@@ -26,5 +27,10 @@ void writeText(int amount, Coord pos) {
 }
 
 void hudRenderFrame(void) {
-	writeText(666, makeCoord(20, 20));
+	writeText(alertness, makeCoord(10, 10));
+	writeText(hygiene, makeCoord(10, 20));
+	writeText(alertness, makeCoord(10, 30));
+	writeText(work, makeCoord(10, 40));
+	writeText(bladder, makeCoord(10, 50));
+	writeText(timeProgress, makeCoord(10, 70));
 }

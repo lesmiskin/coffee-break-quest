@@ -2,18 +2,25 @@
 #include "assets.h"
 #include "input.h"
 
+//Tying animation.
+//Player needs typing animation (head bobbing)
+//Player needs drinking animation (grabs coffee, drinks, then puts back).
+//Player needs 'nearing break' animation (jiggling body).
+
+//Arcade mode: Fighting off other employees.
+//Arcade combat:
+
 double alertness;
 double hygiene;
 double alertness;
 double work;
 double bladder;
-
-double timeRate;
 double timeProgress;
+double timeRate = 1;
 
+const double TIME_INC = 0.02;
 const double MAX_SPEED = 60;
-const double TIME_INC = 0.1;
-const double SPEED_INC = 2;
+const double SPEED_INC = 0.1;
 const double TIME_END = 480;
 
 void speedup() {
@@ -31,7 +38,7 @@ void slowdown() {
 void meterGameFrame(void) {
 	//Quit game once time is up.
 	if(timeProgress >= TIME_END) quit();
-	timeProgress += (SPEED_INC * timeRate);
+	timeProgress += (TIME_INC * timeRate);
 
 	if (checkCommand(CMD_GAME_SLOWDOWN)) slowdown();
 	if (checkCommand(CMD_GAME_SPEEDUP)) speedup();
