@@ -1,7 +1,8 @@
 #include <stdbool.h>
 #include <SDL_events.h>
-#include "input.h"
+#include "meter.h"
 #include "common.h"
+#include "input.h"
 
 #define MAX_COMMANDS 20
 
@@ -25,7 +26,7 @@ void pollInput(void) {
             case SDL_QUIT:
                 commands[CMD_QUIT] = true;
                 break;
-            //Presses
+                //Presses
             case SDL_KEYDOWN: {
                 //Ignore held keys.
                 if(event.key.repeat) break;
@@ -35,21 +36,15 @@ void pollInput(void) {
                 //List of key PRESSES go here.
                 if(keypress == SDL_SCANCODE_ESCAPE)
                     commands[CMD_QUIT] = true;
-                }
+            }
         }
     }
 
     //List of HELD keys go here.
-    if(keysHeld[SDL_SCANCODE_LEFT])
-        commands[CMD_PLAYER_LEFT] = true;
-    else if(keysHeld[SDL_SCANCODE_RIGHT])
-        commands[CMD_PLAYER_RIGHT] = true;
-    if(keysHeld[SDL_SCANCODE_LEFT])
-        commands[CMD_PLAYER_UP] = true;
-    else if(keysHeld[SDL_SCANCODE_DOWN])
-        commands[CMD_PLAYER_DOWN] = true;
-    if(keysHeld[SDL_SCANCODE_SPACE])
-        commands[CMD_PLAYER_FIRE] = true;
+    if(keysHeld[SDL_SCANCODE_D])
+        commands[CMD_PLAYER_DRINK] = true;
+    if(keysHeld[SDL_SCANCODE_B])
+        commands[CMD_PLAYER_BATHROOM] = true;
 }
 
 void processSystemCommands(void) {

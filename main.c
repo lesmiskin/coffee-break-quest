@@ -6,6 +6,8 @@
 #include <assert.h>
 #include "common.h"
 #include "input.h"
+#include "assets.h"
+#include "renderer.h"
 
 static const char *GAME_TITLE = "Mouse Quest";
 const int ANIMATION_HZ = 1000 / 12;		//12fps
@@ -14,8 +16,7 @@ const int GAME_HZ = 1000 / 60;			//60fps
 
 bool running = true;
 SDL_Window *window = NULL;
-SDL_Renderer *renderer = NULL;
-Coord windowSize = { 1680, 1050 };
+Coord windowSize = { 1280, 960 };   // 320x240
 
 static void initSDL(void) {
     SDL_Init(/*SDL_INIT_AUDIO | */SDL_INIT_JOYSTICK | SDL_INIT_HAPTIC);
@@ -68,10 +69,13 @@ int main()  {
 
     initSDL();
     initWindow();
+    initAssets();
 
     long lastRenderFrameTime = clock();
     long lastGameFrameTime = lastRenderFrameTime;
     long lastAnimFrameTime = lastRenderFrameTime;
+
+    play("drink.wav");
 
     //Main game loop (realtime)
     while(running){

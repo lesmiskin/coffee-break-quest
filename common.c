@@ -2,6 +2,7 @@
 #include <stdbool.h>
 #include <SDL.h>
 #include <time.h>
+#include <unistd.h>
 
 static const double RADIAN_CIRCLE = 6.28;
 
@@ -39,4 +40,17 @@ void fatalError(const char *title, const char *message) {
 
 void quit(void) {
     running = false;
+}
+
+char *combineStrings(const char *a, const char *b) {
+    //Allocate exact amount of space necessary to hold the two strings.
+    char *result = malloc(strlen(a) + strlen(b) + 1);		//+1 for the zero-terminator
+    strcpy(result, a);
+    strcat(result, b);
+
+    return result;
+}
+
+bool fileExists(const char *path) {
+    return access(path, R_OK ) == 0;
 }

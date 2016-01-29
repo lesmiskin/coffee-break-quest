@@ -6,7 +6,7 @@
       <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/main.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/common.c" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/input.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/meter.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/input.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/cmake/FindSDL2.cmake" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/cmake/FindSDL2_Mixer.cmake" isTestSource="false" />
