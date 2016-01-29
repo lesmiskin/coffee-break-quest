@@ -9,6 +9,7 @@
 #include "mysdl.h"
 #include "player.h"
 #include "meter.h"
+#include "hud.h"
 
 //TODO: Up key triggers sound and decreases speed of game.
 //TODO: Up key triggers sound and increases speed of game.
@@ -70,7 +71,7 @@ int main()  {
     initWindow();
     initRenderer();
     initAssets();
-//	initHud();
+	initHud();
 
     long lastRenderFrameTime = clock();
     long lastGameFrameTime = lastRenderFrameTime;
@@ -88,14 +89,15 @@ int main()  {
             processSystemCommands();
         }
 
-        //Animation frame
-        if(timer(&lastAnimFrameTime, ANIMATION_HZ)) {
-        }
+		//Animation frame
+		if(timer(&lastAnimFrameTime, ANIMATION_HZ)) {
+		}
 
         //Renderer frame
         double renderFPS;
         if(timer(&lastRenderFrameTime, RENDER_HZ)) {
             sceneRenderFrame();
+			hudRenderFrame();
             updateCanvas();
         }
     }

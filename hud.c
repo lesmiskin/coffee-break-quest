@@ -26,5 +26,5 @@ void writeText(int amount, Coord pos) {
 }
 
 void hudRenderFrame(void) {
-	writeText(123, makeCoord(50,50));
+	writeText(666, makeCoord(20, 20));
 }
