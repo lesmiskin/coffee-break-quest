@@ -1,5 +1,6 @@
-#include <SDL.h>
+
 #include <stdbool.h>
+#include "mysdl.h"
 
 typedef struct {
     double x, y;

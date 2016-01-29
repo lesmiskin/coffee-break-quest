@@ -1,13 +1,11 @@
 #include <time.h>
-#include "SDL.h"
-#include "SDL2_Image/SDL_image.h"
-#include "SDL2_Mixer/SDL_mixer.h"
 #include <stdbool.h>
 #include <assert.h>
 #include "common.h"
 #include "input.h"
 #include "assets.h"
 #include "renderer.h"
+#include "mysdl.h"
 
 static const char *GAME_TITLE = "Mouse Quest";
 const int ANIMATION_HZ = 1000 / 12;		//12fps

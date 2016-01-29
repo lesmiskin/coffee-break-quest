@@ -1,3 +1,3 @@
-#include "SDL.h"
+#include "renderer.h"
 
 SDL_Renderer *renderer = NULL;

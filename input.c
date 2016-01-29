@@ -1,5 +1,4 @@
 #include <stdbool.h>
-#include <SDL_events.h>
 #include "meter.h"
 #include "common.h"
 #include "input.h"

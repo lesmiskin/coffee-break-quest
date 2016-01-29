@@ -1,5 +1,4 @@
 #include <assert.h>
-#include "SDL2_mixer/SDL_mixer.h"
 #include "assets.h"
 #include "common.h"
 #include "renderer.h"

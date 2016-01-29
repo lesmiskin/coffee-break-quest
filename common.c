@@ -1,6 +1,5 @@
 #include "common.h"
 #include <stdbool.h>
-#include <SDL.h>
 #include <time.h>
 #include <unistd.h>
 

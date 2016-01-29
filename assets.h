@@ -1,8 +1,7 @@
 #ifndef ASSETS_H
 #define ASSETS_H
 
-#include "SDL2_Image/SDL_image.h"
-#include "SDL2_Mixer/SDL_mixer.h"
+#include "mysdl.h"
 
 typedef struct {
     char* key;
