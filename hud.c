@@ -52,12 +52,18 @@ void hudGameFrame(void) {
 }
 
 void hudRenderFrame(void) {
-	writeText(alertness, makeCoord(10, 10));
-	writeText(hygiene, makeCoord(10, 20));
-	writeText(alertness, makeCoord(10, 30));
-	writeText(work, makeCoord(10, 40));
-	writeText(bladder, makeCoord(10, 50));
-	writeText(timeProgress, makeCoord(10, 70));
+
+	writeText(alertness, makeCoord(30, 10));
+	writeText(hygiene, makeCoord(30, 20));
+	writeText(bladder, makeCoord(30, 30));
+	writeText(work, makeCoord(30, 40));
+	writeText(timeProgress, makeCoord(30, 55));
+
+	drawSprite(makeSimpleSprite("caff.png"), makeCoord(12, 10));
+	drawSprite(makeSimpleSprite("hyg.png"), makeCoord(12, 20));
+	drawSprite(makeSimpleSprite("blad.png"), makeCoord(12, 30));
+	drawSprite(makeSimpleSprite("prod.png"), makeCoord(12, 40));
+	drawSprite(makeSimpleSprite("grind.png"), makeCoord(11, 55));
 
 	//Draw plumes.
 	if(plume.origin.x > 0) {

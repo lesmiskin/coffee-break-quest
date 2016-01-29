@@ -11,17 +11,15 @@
 #include "meter.h"
 #include "hud.h"
 
-//TODO: Meters if possible.
-
-//TODO: Numbers should flash.
 //TODO: Meter captions.
-//TODO: Mode popup graphics.
-//TODO: Messages that pop up on the screen: "YOU FAIL IT"
-
 //TODO: Game mode (switches between main, and minigame modes).
 //TODO: Combat mechanics.
 
 //TODO: Coffee drinking mechanic: Raises productivity, raises bladder.
+//TODO: Numbers should flash.
+//TODO: Large messages that pop up on the screen: "YOU FAIL IT"
+//TODO: Meters if possible.
+
 
 
 
@@ -87,8 +85,6 @@ int main()  {
     long lastRenderFrameTime = clock();
     long lastGameFrameTime = lastRenderFrameTime;
     long lastAnimFrameTime = lastRenderFrameTime;
-
-    play("drink.wav");
 
     //Main game loop (realtime)
     while(running){

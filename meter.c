@@ -12,7 +12,6 @@
 
 double alertness;
 double hygiene;
-double alertness;
 double work;
 double bladder;
 double timeProgress;
