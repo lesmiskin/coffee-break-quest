@@ -1,6 +1,5 @@
 #include <assert.h>
 #include "assets.h"
-#include "common.h"
 #include "renderer.h"
 
 typedef struct {
@@ -100,7 +99,10 @@ static void loadSounds(void) {
     const int SOUND_VOLUME = 12;
 
     SoundDef defs[] = {
-        { "drink.wav", SOUND_VOLUME * 2 },
+        { "break.wav", SOUND_VOLUME },
+        { "down.wav", SOUND_VOLUME },
+        { "drink.wav", SOUND_VOLUME },
+        { "up.wav", SOUND_VOLUME }
     };
 
     soundCount = sizeof(defs) / sizeof(SoundDef);

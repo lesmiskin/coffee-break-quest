@@ -1,3 +1,5 @@
+#ifndef COMMON_H
+#define COMMON_H
 
 #include <stdbool.h>
 #include "mysdl.h"
@@ -15,3 +17,5 @@ extern void fatalError(const char *title, const char *message);
 extern void quit(void);
 extern char *combineStrings(const char *a, const char *b);
 extern bool fileExists(const char *path);
+
+#endif

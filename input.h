@@ -1,3 +1,6 @@
+#ifndef INPUT_H
+#define INPUT_H
+
 extern void pollInput(void);
 extern void processSystemCommands(void);
 
@@ -6,3 +9,5 @@ typedef enum {
     CMD_PLAYER_DRINK = 1,
     CMD_PLAYER_BATHROOM = 2
 } Command;
+
+#endif

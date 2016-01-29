@@ -53,3 +53,8 @@ char *combineStrings(const char *a, const char *b) {
 bool fileExists(const char *path) {
     return access(path, R_OK ) == 0;
 }
+
+Coord makeCoord(double x, double y) {
+    Coord coord = { x, y };
+    return coord;
+}

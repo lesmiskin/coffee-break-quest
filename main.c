@@ -7,6 +7,14 @@
 #include "renderer.h"
 #include "mysdl.h"
 
+
+//TODO: Show placeholder background when game starts up.
+//TODO: Drink key does something (e.g. triggers a sound).
+//TODO: Break key does something (e.g. triggers a different sound).
+//TODO: Up key triggers sound and decreases speed of game.
+//TODO: Up key triggers sound and increases speed of game.
+
+
 static const char *GAME_TITLE = "Mouse Quest";
 const int ANIMATION_HZ = 1000 / 12;		//12fps
 const int RENDER_HZ = 1000 / 60;		//60fps
@@ -37,13 +45,6 @@ static void initWindow(void) {
         SDL_WINDOW_OPENGL
     );
     assert(window != NULL);
-
-    renderer = SDL_CreateRenderer(
-        window,
-        -1,
-        0
-    );
-    assert(renderer != NULL);
 }
 
 static void shutdownWindow(void) {
@@ -54,6 +55,8 @@ static void shutdownWindow(void) {
 }
 
 static void shutdownMain(void) {
+    shutdownAssets();
+    shutdownRenderer();
     shutdownWindow();
 
     SDL_Quit();
@@ -67,6 +70,7 @@ int main()  {
 
     initSDL();
     initWindow();
+    initRenderer();
     initAssets();
 
     long lastRenderFrameTime = clock();
