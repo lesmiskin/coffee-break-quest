@@ -11,8 +11,19 @@
 #include "meter.h"
 #include "hud.h"
 
-//TODO: Up key triggers sound and decreases speed of game.
-//TODO: Up key triggers sound and increases speed of game.
+//TODO: Meters if possible.
+
+//TODO: Numbers should flash.
+//TODO: Meter captions.
+//TODO: Mode popup graphics.
+//TODO: Messages that pop up on the screen: "YOU FAIL IT"
+
+//TODO: Game mode (switches between main, and minigame modes).
+//TODO: Combat mechanics.
+
+//TODO: Coffee drinking mechanic: Raises productivity, raises bladder.
+
+
 
 static const char *GAME_TITLE = "Coffee Break Quest";
 const int ANIMATION_HZ = 1000 / 12;		//12fps
@@ -86,6 +97,7 @@ int main()  {
             pollInput();
             playerGameFrame();
 			meterGameFrame();
+			hudGameFrame();
             processSystemCommands();
         }
 

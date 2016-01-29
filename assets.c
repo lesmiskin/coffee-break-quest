@@ -94,6 +94,8 @@ static void loadImages(void) {
         { "font-08.png" },
         { "font-09.png" },
         { "font-x.png" },
+        { "drink.png" },
+        { "break.png" },
     };
 
     //Infer asset path from current directory.

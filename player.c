@@ -1,9 +1,11 @@
 #include "player.h"
 #include "assets.h"
 #include "input.h"
+#include "hud.h"
 
 void drink(void) {
 	play("drink.wav");
+	spawnPlume(PLUME_DRINK);
 }
 
 void takeBreak(void) {
