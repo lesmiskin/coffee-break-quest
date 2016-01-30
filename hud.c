@@ -2,6 +2,7 @@
 #include "hud.h"
 #include "renderer.h"
 #include "time.h"
+#include "scene.h"
 
 static Sprite letters[10];
 static const int LETTER_WIDTH = 4;

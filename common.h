@@ -18,5 +18,7 @@ extern void fatalError(const char *title, const char *message);
 extern void quit(void);
 extern char *combineStrings(const char *a, const char *b);
 extern bool fileExists(const char *path);
+extern double sineInc(double offset, double *sineInc, double speed, double magnitude);
+extern double cosInc(double offset, double *sineInc, double speed, double magnitude);
 
 #endif

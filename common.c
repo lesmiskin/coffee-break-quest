@@ -62,3 +62,18 @@ Coord makeCoord(double x, double y) {
     Coord coord = { x, y };
     return coord;
 }
+
+double sineInc(double offset, double *sineInc, double speed, double magnitude) {
+    *sineInc = *sineInc >= RADIAN_CIRCLE ? 0 : *sineInc + speed;
+
+    double sineOffset = (sin(*sineInc) * magnitude);
+    return offset - sineOffset;
+}
+
+double cosInc(double offset, double *sineInc, double speed, double magnitude) {
+    *sineInc = *sineInc >= RADIAN_CIRCLE ? 0 : *sineInc + speed;
+
+    double sineOffset = (cos(*sineInc) * magnitude);
+    return offset - sineOffset;
+}
+
