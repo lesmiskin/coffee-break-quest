@@ -12,48 +12,42 @@
 #include "hud.h"
 #include "enemy.h"
 
-//EMILY WORK
-//TODO: Game mechanic fine tuning
-//TODO: Put props in the Office game.
-//TODO: Update sprites in Office game.
-//TODO: Hook up proper character sprites in Combat game.
-//TODO: Get up / come back "animation"
-//TODO: Coffee drinking animation.
-//TODO: Sigh for blad expulsion.
-//TODO: Numbers should flash.
-//TODO: Large messages that pop up on the screen: "YOU FAIL IT"
-
 //COMBAT / LES
-//TODO: Introduce enemies.
-//TODO: Enemies shoot coffee cups.
-//TODO: When hit, pushes them away.
-//TODO: Goal is to push them all offscreen.
-//TODO: Enemies cause GAME OVER state (b&w background).
-//TODO: Once killed, game loops back to start.
-//TODO: Detect resolution and size accordingly.
 
 //*************************************************************
 
-//IF TIME
+//LES
+//TODO: Randomise the people sprites.
+//TODO: Introduce people captions.
+//TODO: LES - Tutorial text.
+//TODO: LES - GAME OVER screens.
+//TODO: When hit, pushes them away.
+//TODO: Goal is to push them all offscreen.
+//TODO: Enemies cause GAME OVER state (b&w background).
+//TODO: Health bar (icons).
+//TODO: Review sounds.
 //TODO: Tapping on keyboard sound effect.
-//TODO: Tapping and bobbing animations speed up when time is sped up.
-//TODO: Meters.
-//TODO: Particle effect for game-over.
-//TODO: Random objects on table.
+//TODO: Coffee cups cause "hit" sound.
+//TODO: Coffee cups cause "hit" graphic on player.
+//TODO: Random coffee cup thrown from unknown assailant.
+//TODO: Once killed, game loops back to start.
+//TODO: Detect resolution and size accordingly.
+
+//POLISH
+//TODO: Smoothing out animations.
+//TODO: 'x' press bug: Are we clearing the arrays of out-of-range shots etc?
 //TODO: Cheat code to force dismemberment (Konami code - learning is FUN!).
+//TODO: Momentum on Tim.
+//TODO: Retail distribution on Linux, Mac, and Windows.
+
+//IF TIME
+//TODO: Music...
+//TODO: Hands going up and down, using arm sprite.
+//TODO: Tapping and bobbing animations speed up when time is sped up.
 //TODO: Ties streaming behind them?
 //TODO: Monochrome effect.
 //TODO: Tapping sound effect for keyboard.
-//TODO: Hands going up and down.
-//TODO: Feet going up and down.
-//TODO: Control menu in bottom right of screen.
-//TODO: Exploding cat.
-//TODO: Momentum on Tim.
-//TODO: Coffee cups cause "hit" sound.
-//TODO: Coffee cups cause "hit" graphic on player.
 //TODO: Forced re-entry upon game exit (Y/Y etc.)
-//TODO: Rotating clock hands.
-//TODO: 'x' press bug: Are we clearing the arrays of out-of-range shots etc?
 
 
 static const char *GAME_TITLE = "Coffee Break Quest";
