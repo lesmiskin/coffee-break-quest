@@ -22,6 +22,8 @@ bool shotDir = false;
 Shot shots[255];
 int shotInc = 0;
 long lastShot;
+int walkInc = 0;
+bool playerDir = false;
 
 void drink(void) {
 	play("drink.wav");
@@ -45,7 +47,12 @@ void shoot(void) {
 		shotInc = 0;
 	}
 
-	Shot shot = { makeCoord(pos.x, pos.y+10), makeCoord(1.5, targetInc), shotInc };
+	Coord target = makeCoord(
+		playerDir ? 1.5 : -1.5,
+		targetInc
+	);
+
+	Shot shot = { makeCoord(pos.x, pos.y+7), target, shotInc };
 	shots[shotInc++] = shot;
 
 	if(shotDir == true && targetInc > 1) {
@@ -60,11 +67,36 @@ void shoot(void) {
 	}
 }
 
+bool isWalking(void) {
+	return checkCommand(CMD_PLAYER_LEFT) ||
+		checkCommand(CMD_PLAYER_RIGHT) ||
+		checkCommand(CMD_PLAYER_DOWN) ||
+		checkCommand(CMD_PLAYER_UP);
+}
+
+void playerAnimateFrame(void) {
+	if(isWalking()) {
+		walkInc = (walkInc == 0) ? 1 : 0;
+	}
+}
+
 void playerRenderFrame(void) {
 	if(mode != MODE_COMBAT) return;
 
 	//Draw player.
-	Sprite player = makeSimpleSprite("combat-player.png");
+	Sprite player;
+	SDL_RendererFlip flip = playerDir ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE;
+
+	if(isWalking()) {
+		if(walkInc == 1) {
+			player = makeFlippedSprite("timcalmstep.png", flip);
+		}else{
+			player = makeFlippedSprite("timcalm.png", flip);
+		}
+	}else{
+		player = makeFlippedSprite("timcalm.png", flip);
+	}
+
 	drawSprite(player, pos);
 
 	//Draw shots.
@@ -77,8 +109,16 @@ void playerRenderFrame(void) {
 
 void playerGameFrame(void) {
 	if(mode == MODE_COMBAT) {
-		if (checkCommand(CMD_PLAYER_LEFT)) pos.x -= MOVE_INC;
-		if (checkCommand(CMD_PLAYER_RIGHT)) pos.x += MOVE_INC;
+		if (checkCommand(CMD_PLAYER_LEFT)) {
+			pos.x -= MOVE_INC;
+			playerDir = false;
+		}
+
+		if (checkCommand(CMD_PLAYER_RIGHT)) {
+			pos.x += MOVE_INC;
+			playerDir = true;
+		}
+
 		if (checkCommand(CMD_PLAYER_UP)) pos.y -= MOVE_INC;
 		if (checkCommand(CMD_PLAYER_DOWN)) pos.y += MOVE_INC;
 		if (checkCommand(CMD_PLAYER_FIRE)) shoot();

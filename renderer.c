@@ -25,15 +25,17 @@ Sprite makeSprite(SDL_Texture *texture, Coord offset, SDL_RendererFlip flip) {
     return sprite;
 }
 
+Sprite makeFlippedSprite(char *textureName, SDL_RendererFlip flip) {
+    SDL_Texture *texture = getTexture(textureName);
+    return makeSprite(texture, zeroCoord(), flip);
+}
+
 Sprite makeSimpleSprite(char *textureName) {
 	SDL_Texture *texture = getTexture(textureName);
 	return makeSprite(texture, zeroCoord(), SDL_FLIP_NONE);
 }
 
-void drawSprite(Sprite sprite, Coord origin) {
-    double scale = 1;
-    double angle = 0;
-
+void drawSpriteFull(Sprite sprite, Coord origin, double scale, double angle) {
     //Ensure we're always calling this with an initialised sprite_t.
     assert(sprite.texture != NULL);
 
@@ -61,6 +63,10 @@ void drawSprite(Sprite sprite, Coord origin) {
     };
 
     SDL_RenderCopyEx(renderer, sprite.texture, NULL, &destination, angle, &rotateOrigin, sprite.flip);
+}
+
+void drawSprite(Sprite sprite, Coord origin) {
+    drawSpriteFull(sprite, origin, 1, 0);
 }
 
 void initRenderer(void) {

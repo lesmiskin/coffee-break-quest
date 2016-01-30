@@ -11,7 +11,7 @@ set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR})
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
-add_executable(gamejam enemy.c enemy.h hud.c player.c scene.c renderer.c assets.c input.c common.c meter.c main.c)
+add_executable(gamejam enemy.c hud.c player.c scene.c renderer.c assets.c input.c common.c meter.c main.c)
 
 # SDL includes (Source: https://github.com/tcbrindle/sdl2-cmake-scripts)
 find_package(SDL2 REQUIRED)

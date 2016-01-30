@@ -10,6 +10,7 @@
 #include "player.h"
 #include "meter.h"
 #include "hud.h"
+#include "enemy.h"
 
 //EMILY WORK
 //TODO: Game mechanics and calculations.
@@ -51,8 +52,11 @@
 //TODO: Feet going up and down.
 //TODO: Control menu in bottom right of screen.
 //TODO: Exploding cat.
-
-
+//TODO: Momentum on Tim.
+//TODO: Coffee cups cause "hit" sound.
+//TODO: Coffee cups cause "hit" graphic on player.
+//TODO: Forced re-entry upon game exit (Y/Y etc.)
+//TODO: Rotating clock hands.
 
 
 static const char *GAME_TITLE = "Coffee Break Quest";
@@ -131,6 +135,7 @@ int main()  {
         if(timer(&lastGameFrameTime, GAME_HZ)) {
             pollInput();
             playerGameFrame();
+            enemyGameFrame();
 			meterGameFrame();
 			hudGameFrame();
             processSystemCommands();
@@ -138,7 +143,9 @@ int main()  {
 
 		//Animation frame
 		if(timer(&lastAnimFrameTime, ANIMATION_HZ)) {
+            enemyAnimateFrame();
 			sceneAnimateFrame();
+            playerAnimateFrame();
 		}
 
         //Renderer frame
@@ -146,6 +153,7 @@ int main()  {
         if(timer(&lastRenderFrameTime, RENDER_HZ)) {
             sceneRenderFrame();
 			playerRenderFrame();
+            enemyRenderFrame();
 			hudRenderFrame();
             updateCanvas();
         }

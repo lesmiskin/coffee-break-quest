@@ -2,6 +2,8 @@
 #include <stdbool.h>
 #include <time.h>
 #include <unistd.h>
+#include "enemy.h"
+#include "scene.h"
 
 static const double RADIAN_CIRCLE = 6.28;
 
@@ -10,6 +12,8 @@ GameMode mode = MODE_OFFICE;
 void switchMode(void) {
     if(mode == MODE_OFFICE) {
         mode = MODE_COMBAT;
+        initEnemy();
+        initScene();
     }else{
         mode = MODE_OFFICE;
     }
@@ -87,3 +91,37 @@ double cosInc(double offset, double *sineInc, double speed, double magnitude) {
     return offset - sineOffset;
 }
 
+int randomMq(int min, int max) {
+    return (rand() % (max + 1 - min)) + min;
+}
+
+double getAngle(Coord a, Coord b) {
+    return atan2(b.y - a.y, b.x - a.x);
+}
+
+Coord getStep(Coord a, Coord b, double speed, bool negativeMagic) {
+    //Already there?
+    if(a.x == b.x && a.y == b.y) return zeroCoord();
+
+    double angle = getAngle(a, b);
+
+    //Some magic going on here...
+    return makeCoord(
+            (cos(angle) * (negativeMagic ? -speed : speed)),
+            (sin(angle) * (negativeMagic ? -speed : speed))
+    );
+}
+
+bool chance(int probability) {
+    //Shortcuts for deterministic scenarios (impossible and always)
+    if(probability == 0) {
+        return false;
+    }else if (probability == 100) {
+        return true;
+    }
+
+    //TODO: Consider simplified randomMq expression based on size of probability (e.g. 50% needs only range of 1).
+
+    int roll = randomMq(0, 100);			//dice roll up to 100 (to match with a percentage-based probability amount)
+    return probability >= roll;			//e.g. 99% is higher than a roll of 5, 50, and 75.
+}

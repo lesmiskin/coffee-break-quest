@@ -25,7 +25,10 @@ extern void fatalError(const char *title, const char *message);
 extern void quit(void);
 extern char *combineStrings(const char *a, const char *b);
 extern bool fileExists(const char *path);
+extern int randomMq(int min, int max);
 extern double sineInc(double offset, double *sineInc, double speed, double magnitude);
 extern double cosInc(double offset, double *sineInc, double speed, double magnitude);
+extern double getAngle(Coord a, Coord b);
+extern Coord getStep(Coord a, Coord b, double speed, bool negativeMagic);
 
 #endif

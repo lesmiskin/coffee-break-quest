@@ -1,9 +1,13 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-void playerGameFrame(void);
-void playerRenderFrame(void);
-void shoot(void);
-void initPlayer();
+#include "common.h"
+
+extern void playerGameFrame(void);
+extern void playerRenderFrame(void);
+extern void shoot(void);
+extern void initPlayer();
+extern Coord pos;
+extern void playerAnimateFrame(void);
 
 #endif

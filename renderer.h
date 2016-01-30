@@ -19,8 +19,10 @@ extern Coord screenBounds;
 extern void initRenderer();
 extern void shutdownRenderer();
 extern void updateCanvas();
+extern void drawSpriteFull(Sprite sprite, Coord origin, double scale, double angle);
 extern void drawSprite(Sprite sprite, Coord origin);
 extern Coord getTextureSize(SDL_Texture *texture);
+extern Sprite makeFlippedSprite(char *textureName, SDL_RendererFlip flip);
 extern Sprite makeSimpleSprite(char *textureName);
 
 #endif

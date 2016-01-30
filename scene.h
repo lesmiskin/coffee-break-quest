@@ -3,6 +3,6 @@
 
 extern void sceneRenderFrame(void);
 extern void sceneAnimateFrame(void);
-extern double coffeeInc;
+extern void initScene();
 
 #endif
