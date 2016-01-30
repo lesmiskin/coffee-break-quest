@@ -121,8 +121,27 @@ bool chance(int probability) {
         return true;
     }
 
-    //TODO: Consider simplified randomMq expression based on size of probability (e.g. 50% needs only range of 1).
-
     int roll = randomMq(0, 100);			//dice roll up to 100 (to match with a percentage-based probability amount)
     return probability >= roll;			//e.g. 99% is higher than a roll of 5, 50, and 75.
 }
+
+bool inBounds(Coord point, Rect area) {
+    return
+            point.x >= area.x && point.x <= area.width &&
+            point.y >= area.y && point.y <= area.height;
+}
+
+Rect makeBounds(Coord origin, double width, double height) {
+    Rect bounds = {
+            origin.x - (width / 2),
+            origin.y - (height / 2),
+            origin.x + (width / 2),
+            origin.y + (height / 2)
+    };
+    return bounds;
+}
+
+Rect makeSquareBounds(Coord origin, double size) {
+    return makeBounds(origin, size, size);
+}
+
