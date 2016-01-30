@@ -94,12 +94,12 @@ void enemyGameFrame(void) {
 
 	//Everyone put offscreen? Then win.
 	if(hasWon()) {
-		switchMode();
+		changeMode(MODE_COMBAT_WON);
 	}
 
 	//Did the player go offscreen? Switch back to our desk, then.
 	if(!onScreen(pos, 0)) {
-//		switchMode();
+//		changeMode();
 	}
 
 	for(int i=0; i < MAX_ENEMY; i++) {
@@ -150,7 +150,7 @@ void enemyGameFrame(void) {
 			enemies[i].coord.y += homeStep.y;
 
 			//Throw cup.
-			if (timer(&enemies[i].lastThrow, enemies[i].nextThrow)) {
+			if (onScreen(enemies[i].coord, 10) && timer(&enemies[i].lastThrow, enemies[i].nextThrow)) {
 				cupInc = (cupInc == MAX_CUPS ? 0 : cupInc + 1);
 
 				Cup cup = {enemies[i].coord, cupStep, randomMq(0, 360)};

@@ -130,7 +130,7 @@ void playerGameFrame(void) {
 	if(mode == MODE_COMBAT) {
 		if(health <= 0) {
 			//TODO: Game over.
-			switchMode();
+			changeMode(MODE_TITLE);
 		}
 
 		if (checkCommand(CMD_PLAYER_LEFT)) {

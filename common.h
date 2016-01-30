@@ -9,8 +9,17 @@ typedef struct {
 } Coord;
 
 typedef enum {
+	MODE_TITLE,
+	MODE_BREAK_INTRO,
+	MODE_BREAK,
+	MODE_BREAK_OOPS,
+	MODE_COMBAT_FIRSTTIME,
+	MODE_COMBAT,
+	MODE_COMBAT_LOST,
+	MODE_COMBAT_WON,
 	MODE_OFFICE,
-	MODE_COMBAT
+	MODE_OFFICE_WON,
+	MODE_OFFICE_LOST,
 } GameMode;
 
 typedef struct {
@@ -23,7 +32,7 @@ extern bool inBounds(Coord point, Rect area);
 extern Rect makeBounds(Coord origin, double width, double height);
 extern Rect makeSquareBounds(Coord origin, double size);
 extern GameMode mode;
-extern void switchMode(void);
+extern void changeMode(GameMode newMode);
 extern SDL_Window *window;
 extern bool running;
 extern Coord makeCoord(double x, double y);

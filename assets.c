@@ -177,8 +177,14 @@ static void loadImages(void) {
         { "font-x.png" },
         { "font-y.png" },
         { "font-z.png" },
+        { "font-bang.png" },
 
-	};
+        { "title-fail.png" },
+        { "title-winning.png" },
+        { "title-coffee-break-quest.png" },
+        { "title-coffee-break-quest-1.png" },
+        { "title-uhh.png" },
+    };
 
     //Infer asset path from current directory.
     char* workingPath = SDL_GetBasePath();

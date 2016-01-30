@@ -40,7 +40,19 @@ char *deskToys[] = {
 //TODO: Shooting people makes them fly backwards (inverse of target).
 //TODO: Coffee cups vanish when hitting player.
 
+int titleAnim = 0;
+Coord coffeeCoord = { 100, 100 };
+double coffeeInc = 0;
+bool textFlicker = false;
+
 void sceneAnimateFrame() {
+	switch(mode) {
+		case MODE_TITLE:
+			titleAnim = titleAnim == 0 ? 1 : 0;
+			textFlicker = !textFlicker;
+			break;
+	}
+
     if(bobDir && bobHeadInc > 1) {
         bobDir = false;
     }else if(!bobDir && bobHeadInc < 0){
@@ -73,92 +85,142 @@ void sceneAnimateFrame() {
 }
 
 void sceneRenderFrame() {
-	if(mode == MODE_COMBAT) {
-        Sprite sprite = makeSimpleSprite("carpet.png");
-        drawSprite(sprite, makeCoord(screenBounds.x/2, screenBounds.y/2));
 
-		for(int i = 0; i < MAX_PROPS; i++) {
-			//Hacky check for unset props.
-			if(props[i].sprite.size.y == 0 || props[i].sprite.texture == NULL) continue;
+	switch(mode) {
+		case MODE_TITLE: {
+			Sprite carpet = makeSimpleSprite("carpet.png");
+			drawSprite(carpet, makeCoord(screenBounds.x/2, screenBounds.y/2));
 
-			drawSprite(props[i].sprite, props[i].coord);
+			Sprite coffee = makeSimpleSprite("coffee.png");
+			drawSprite(coffee, makeCoord(sineInc(screenBounds.x/2, &coffeeInc, 0.05, 64), 120));
+
+			Sprite sprite;
+
+			if(titleAnim == 0) {
+				sprite = makeSimpleSprite("title-coffee-break-quest.png");
+			}else{
+				sprite = makeSimpleSprite("title-coffee-break-quest-1.png");
+			}
+			drawSprite(sprite, makeCoord(screenBounds.x / 2, screenBounds.y / 3));
+
+			if(textFlicker) {
+				writeFont("press spacebar to begin your adventure!", makeCoord(90, 220));
+			}
+
+			break;
 		}
 
-		writeFont("this is a test sentence", makeCoord(50,50));
-		writeFont("this is a test sentence", makeCoord(30,30));
+		case MODE_OFFICE:
+			officeFrame();
+			break;
 
+		case MODE_COMBAT: {
+			Sprite sprite = makeSimpleSprite("carpet.png");
+			drawSprite(sprite, makeCoord(screenBounds.x/2, screenBounds.y/2));
+
+			for(int i = 0; i < MAX_PROPS; i++) {
+				//Hacky check for unset props.
+				if(props[i].sprite.size.y == 0 || props[i].sprite.texture == NULL) continue;
+
+				drawSprite(props[i].sprite, props[i].coord);
+			}
+			break;
+
+		case MODE_BREAK_INTRO:
+			break;
+		case MODE_BREAK_OOPS:
+			break;
+		case MODE_COMBAT_FIRSTTIME:
+			break;
+		case MODE_COMBAT_LOST:
+			break;
+		} case MODE_COMBAT_WON:
+			break;
+		case MODE_OFFICE_WON:
+			break;
+		case MODE_OFFICE_LOST:
+			break;
+	}
+
+	return;
+
+	//GOOD AIM!				[DONE]
+	//YOU FAIL IT :P
+	//#WINNING!
+	//UH...
+	//COFFEE BREAK QUEST
+}
+
+void officeFrame() {
+	int xOffset = 3;
+	int yOffset = 30;
+
+	if (onBreak){
+		breakOffset += 10;
+		if (breakOffset > 200){
+			onBreak = false;
+			breakOffset = 0;
+		}
+	}
+
+	if (onDrink && drinkInc < maxDrink){
+		drinkOffset = 20;
+		drinkInc++;
+	} else {
+		drinkOffset = 0;
+		onDrink = false;
+		drinkInc = 0;
+	}
+
+	Sprite sprite = makeSimpleSprite("office-bg.png");
+	drawSprite(sprite, makeCoord(screenBounds.x/2, screenBounds.y/2));
+	Sprite leg1 = makeSimpleSprite("leg.png");
+	drawSprite(leg1, makeCoord(screenBounds.x/2 - xOffset - breakOffset + drinkOffset, screenBounds.y/2 + yOffset + 30 - bobBodyInc));
+	Sprite leg2 = makeSimpleSprite("leg.png");
+	drawSprite(leg2, makeCoord(screenBounds.x/2 - xOffset - 30 - breakOffset + drinkOffset, screenBounds.y/2 + yOffset + 30 + bobBodyInc));
+	Sprite chair1 = makeSimpleSprite("chair-bottom-1.png");
+	drawSprite(chair1, makeCoord(screenBounds.x/2 - xOffset + drinkOffset, screenBounds.y/2 + yOffset + 31));
+	if (drinkInc < maxDrink/2) {
+		if (randomNo > 90) {
+			Sprite coffee = makeSimpleSprite("coffee.png");
+			drawSprite(coffee, makeCoord(235/*ceil(coffeePos)*/, screenBounds.y / 2 + 5));
+		}
+		else {
+			Sprite energydrink = makeSimpleSprite("energydrink.png");
+			drawSprite(energydrink, makeCoord(235/*ceil(coffeePos)*/, screenBounds.y / 2 + 5));
+		}
+	}
+	if(toyOn){
+		Sprite deskToy = makeSimpleSprite("clockon.png");
+		drawSprite(deskToy, makeCoord(65/*ceil(coffeePos)*/, screenBounds.y/2 + 5));
 	}else{
-        int xOffset = 3;
-        int yOffset = 30;
-
-        if (onBreak){
-            breakOffset += 10;
-            if (breakOffset > 200){
-                onBreak = false;
-                breakOffset = 0;
-            }
-        }
-
-        if (onDrink && drinkInc < maxDrink){
-            drinkOffset = 20;
-            drinkInc++;
-        } else {
-            drinkOffset = 0;
-            onDrink = false;
-            drinkInc = 0;
-        }
-
-        Sprite sprite = makeSimpleSprite("office-bg.png");
-        drawSprite(sprite, makeCoord(screenBounds.x/2, screenBounds.y/2));
-        Sprite leg1 = makeSimpleSprite("leg.png");
-        drawSprite(leg1, makeCoord(screenBounds.x/2 - xOffset - breakOffset + drinkOffset, screenBounds.y/2 + yOffset + 30 - bobBodyInc));
-        Sprite leg2 = makeSimpleSprite("leg.png");
-        drawSprite(leg2, makeCoord(screenBounds.x/2 - xOffset - 30 - breakOffset + drinkOffset, screenBounds.y/2 + yOffset + 30 + bobBodyInc));
-        Sprite chair1 = makeSimpleSprite("chair-bottom-1.png");
-        drawSprite(chair1, makeCoord(screenBounds.x/2 - xOffset + drinkOffset, screenBounds.y/2 + yOffset + 31));
-        if (drinkInc < maxDrink/2) {
-            if (randomNo > 90) {
-                Sprite coffee = makeSimpleSprite("coffee.png");
-                drawSprite(coffee, makeCoord(235/*ceil(coffeePos)*/, screenBounds.y / 2 + 5));
-            }
-            else {
-                Sprite energydrink = makeSimpleSprite("energydrink.png");
-                drawSprite(energydrink, makeCoord(235/*ceil(coffeePos)*/, screenBounds.y / 2 + 5));
-            }
-        }
-        if(toyOn){
-            Sprite deskToy = makeSimpleSprite("clockon.png");
-            drawSprite(deskToy, makeCoord(65/*ceil(coffeePos)*/, screenBounds.y/2 + 5));
-        }else{
-            Sprite deskToy = makeSimpleSprite("clockoff.png");
-            drawSprite(deskToy, makeCoord(65/*ceil(coffeePos)*/, screenBounds.y/2 + 5));
-        }
-        //Sprite chair1 = makeSimpleSprite("chair-bottom.png");
-        //drawSprite(chair1, makeCoord(screenBounds.x/2 - xOffset + 20, screenBounds.y/2 + yOffset));
-        //Sprite chair1 = makeSimpleSprite("chair-bottom.png");
-        //drawSprite(chair1, makeCoord(screenBounds.x/2 - xOffset, screenBounds.y/2 + yOffset));
-        if (onDrink && drinkInc < maxDrink/2){
-            Sprite arm = makeSimpleSprite("arm.png");
-            drawSprite(arm, makeCoord(screenBounds.x/2 - xOffset - breakOffset + drinkOffset, screenBounds.y/2 + yOffset - bobBodyInc));
-            Sprite body = makeSimpleSprite("body-yellow.png");
-            drawSprite(body, makeCoord(screenBounds.x/2 - xOffset - breakOffset + drinkOffset, screenBounds.y/2 + yOffset - bobBodyInc));
-        }
-        if (drinkInc >= maxDrink/2) {
-            Sprite armdrink = makeSimpleSprite("armdrink.png");
-            drawSprite(armdrink, makeCoord(screenBounds.x/2 - xOffset - breakOffset + drinkOffset, screenBounds.y/2 + yOffset - bobBodyInc));
-            Sprite bodydrink = makeSimpleSprite("bodyyellowdrink.png");
-            drawSprite(bodydrink, makeCoord(screenBounds.x/2 - xOffset - breakOffset + drinkOffset, screenBounds.y/2 + yOffset - bobBodyInc));
-        } else {
-            Sprite body = makeSimpleSprite("body-yellow.png");
-            drawSprite(body, makeCoord(screenBounds.x / 2 - xOffset - breakOffset + drinkOffset,
-                                       screenBounds.y / 2 + yOffset - bobBodyInc));
-        }
-        Sprite chair2 = makeSimpleSprite("chair-top.png");
-        drawSprite(chair2, makeCoord(screenBounds.x/2 - xOffset + drinkOffset, screenBounds.y/2 + yOffset));
-        Sprite head = makeSimpleSprite("head-black.png");
-        drawSprite(head, makeCoord(screenBounds.x/2 - xOffset - breakOffset + drinkOffset, screenBounds.y/2 + yOffset + 1 - bobHeadInc));
-
-    }
+		Sprite deskToy = makeSimpleSprite("clockoff.png");
+		drawSprite(deskToy, makeCoord(65/*ceil(coffeePos)*/, screenBounds.y/2 + 5));
+	}
+	//Sprite chair1 = makeSimpleSprite("chair-bottom.png");
+	//drawSprite(chair1, makeCoord(screenBounds.x/2 - xOffset + 20, screenBounds.y/2 + yOffset));
+	//Sprite chair1 = makeSimpleSprite("chair-bottom.png");
+	//drawSprite(chair1, makeCoord(screenBounds.x/2 - xOffset, screenBounds.y/2 + yOffset));
+	if (onDrink && drinkInc < maxDrink/2){
+		Sprite arm = makeSimpleSprite("arm.png");
+		drawSprite(arm, makeCoord(screenBounds.x/2 - xOffset - breakOffset + drinkOffset, screenBounds.y/2 + yOffset - bobBodyInc));
+		Sprite body = makeSimpleSprite("body-yellow.png");
+		drawSprite(body, makeCoord(screenBounds.x/2 - xOffset - breakOffset + drinkOffset, screenBounds.y/2 + yOffset - bobBodyInc));
+	}
+	if (drinkInc >= maxDrink/2) {
+		Sprite armdrink = makeSimpleSprite("armdrink.png");
+		drawSprite(armdrink, makeCoord(screenBounds.x/2 - xOffset - breakOffset + drinkOffset, screenBounds.y/2 + yOffset - bobBodyInc));
+		Sprite bodydrink = makeSimpleSprite("bodyyellowdrink.png");
+		drawSprite(bodydrink, makeCoord(screenBounds.x/2 - xOffset - breakOffset + drinkOffset, screenBounds.y/2 + yOffset - bobBodyInc));
+	} else {
+		Sprite body = makeSimpleSprite("body-yellow.png");
+		drawSprite(body, makeCoord(screenBounds.x / 2 - xOffset - breakOffset + drinkOffset,
+								   screenBounds.y / 2 + yOffset - bobBodyInc));
+	}
+	Sprite chair2 = makeSimpleSprite("chair-top.png");
+	drawSprite(chair2, makeCoord(screenBounds.x/2 - xOffset + drinkOffset, screenBounds.y/2 + yOffset));
+	Sprite head = makeSimpleSprite("head-black.png");
+	drawSprite(head, makeCoord(screenBounds.x/2 - xOffset - breakOffset + drinkOffset, screenBounds.y/2 + yOffset + 1 - bobHeadInc));
 }
 
 void initScene() {

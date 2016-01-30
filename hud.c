@@ -52,7 +52,13 @@ void writeFont(char *text, Coord pos) {
 		if(text[i] != ' ') {
 
 			char fontFile[50];
-			sprintf(fontFile, "font-%c.png", text[i]);
+
+			if(text[i] == '!') {
+				sprintf(fontFile, "font-bang.png");
+			}else{
+				sprintf(fontFile, "font-%c.png", text[i]);
+			}
+
 			Sprite sprite = makeSimpleSprite(fontFile);
 			drawSprite(sprite, makeCoord(pos.x, pos.y));
 
@@ -63,14 +69,14 @@ void writeFont(char *text, Coord pos) {
 			}else if(text[i] == 'o') {
 				pos.x += 5;
 			}else if(text[i] == 'u') {
-				pos.x += 6;
+				pos.x += 5;
 			}else if(text[i] == 'i' || text[i] == 'e') {
 				pos.x += 3;
 			}else{
 				pos.x += sprite.size.x - 1;
 			}
 		}else{
-			pos.x += 4;
+			pos.x += 2;
 		}
 	}
 

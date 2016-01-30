@@ -55,7 +55,7 @@ void meterGameFrame(void) {
 			bladder = 0;
 		}
 		if (hygiene <= 0){
-			switchMode();
+			changeMode(MODE_COMBAT);
 			hygiene = 40;
 		}
 		if (alertness <= 0) quit(); //"YOU LOSE"

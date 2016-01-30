@@ -9,16 +9,18 @@
 static const double RADIAN_CIRCLE = 6.28;
 double randomNo;
 
-GameMode mode = MODE_OFFICE;
+GameMode mode = MODE_TITLE;
 
-void switchMode(void) {
+void changeMode(GameMode newMode) {
+    mode = newMode;
+
     if(mode == MODE_OFFICE) {
-        mode = MODE_COMBAT;
+//        mode = MODE_COMBAT;
         initPlayer();
         initEnemy();
         initScene();
-    }else{
-        mode = MODE_OFFICE;
+//    }else{
+//        mode = MODE_OFFICE;
     }
 }
 

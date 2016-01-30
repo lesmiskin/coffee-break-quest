@@ -22,11 +22,39 @@
 
 //*************************************************************
 
-//EMILY
-//TODO: Placement of objects on desk.
-//TODO: More character names.
+//REQUIRED
+//TODO: Screen modes (title, end screen).						LES
+//TODO: Aggro, non-aggro upon breaks.							LES
+//TODO: Fix delay between breaks and drinking (i.e. can't do them all at the same time).	LES
+//TODO: Health bar during combat.								LES
+//TODO: Windows builds etc.
+//TODO: Speed indicator.
 
-//TODO: Show chair as part of the props on combat screen.
+//TODO: Add gents door (random placement) to combat arena.		EM
+//TODO: Add ladies door (random placement) to combat arena.		EM
+//TODO: Add warning flashes.									EM
+//TODO: Cups disappear when hitting player.						EM
+//TODO: Analog clock.											EM
+
+//POLISH
+//TODO: Random placement on desk.
+//TODO: Desk ornament animation.
+//TODO: More character names.
+//TODO: 9-5 clock?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //TODO: B&W triggers:
 	//Titlescreen: COFFEE BREAK QUEST title screen, press SPACE to play.
 		//Gain maximum productivity before the workday ends! TIP: Don't forget to take breaks.
@@ -37,11 +65,10 @@
 	//Goal: Push all your collegues offscreen to win (SPACE).
 	//Break message (once only): It's time to use the restroom (Use the arrows).
 
-//TODO: Engage non-aggro combat when taking breaks.
 //TODO: Incorporate "Press D to drink" etc. into warning flashes in Office mode.
-//TODO: Add gents door (random placement) to combat arena.
-//TODO: Add ladies door (random placement) to combat arena.
 //TODO: Office chars should change facing direction based on last movement (-'ve of target).
+//TODO: Shading for characters?
+//TODO: Coffee icon for application.
 
 
 //LES: BIG
@@ -51,9 +78,6 @@
 //TODO: Enemies cause GAME OVER state (b&w background).
 
 //LES: EASY
-
-//TODO: Fix delay between breaks and drinking (i.e. can't do them all at the same time).
-
 //TODO: Health bar (icons).
 //TODO: Coffee cups cause "hit" sound.
 //TODO: Tapping on keyboard sound effect.

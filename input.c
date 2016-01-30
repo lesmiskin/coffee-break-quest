@@ -32,12 +32,24 @@ void pollInput(void) {
 
                 SDL_Keycode keypress = event.key.keysym.scancode;
 
-                //List of key PRESSES go here.
-                if(keypress == SDL_SCANCODE_ESCAPE)
-                    commands[CMD_QUIT] = true;
 
+				//Skip from title to game.
+				if(mode == MODE_TITLE) {
+					if(keypress == SDL_SCANCODE_SPACE)
+						changeMode(MODE_OFFICE);
+					if(keypress == SDL_SCANCODE_ESCAPE)
+						commands[CMD_QUIT] = true;
+				}
+
+				//Exit to title.
+				if(mode != MODE_TITLE) {
+					if(keypress == SDL_SCANCODE_ESCAPE)
+					changeMode(MODE_TITLE);
+				}
+
+                //List of key PRESSES go here.
                 if(keypress == SDL_SCANCODE_X)
-                    switchMode();
+                    changeMode(MODE_COMBAT);
             }
         }
     }
