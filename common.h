@@ -27,5 +27,7 @@ extern char *combineStrings(const char *a, const char *b);
 extern bool fileExists(const char *path);
 extern double sineInc(double offset, double *sineInc, double speed, double magnitude);
 extern double cosInc(double offset, double *sineInc, double speed, double magnitude);
+extern double randomNo;
+int randomMq(int min, int max);
 
 #endif

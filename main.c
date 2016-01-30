@@ -12,11 +12,7 @@
 #include "hud.h"
 
 //EMILY WORK
-//TODO: Game mechanics and calculations.
-    //TODO: Caff reduces over time.
-    //TODO: Prod increases proportional to the caffiene.
-    //TODO: Hygene decreases when breaks are not taken.
-    //TODO: Bladder increases when breaks are not taken.
+//TODO: Game mechanic fine tuning
 //TODO: Put props in the Office game.
 //TODO: Update sprites in Office game.
 //TODO: Hook up proper character sprites in Combat game.
@@ -91,6 +87,7 @@ static void initWindow(void) {
         SDL_WINDOW_OPENGL
     );
     assert(window != NULL);
+    randomNo = randomMq(1,100);
 }
 
 static void shutdownWindow(void) {

@@ -4,6 +4,7 @@
 #include <unistd.h>
 
 static const double RADIAN_CIRCLE = 6.28;
+double randomNo;
 
 GameMode mode = MODE_OFFICE;
 
@@ -87,3 +88,6 @@ double cosInc(double offset, double *sineInc, double speed, double magnitude) {
     return offset - sineOffset;
 }
 
+int randomMq(int min, int max) {
+    return (rand() % (max + 1 - min)) + min;
+}
