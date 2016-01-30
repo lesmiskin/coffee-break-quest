@@ -3,6 +3,8 @@
 #include "common.h"
 #include "assets.h"
 #include "hud.h"
+#include "meter.h"
+#include "enemy.h"
 
 #define MAX_PROPS 8
 
@@ -24,6 +26,10 @@ bool onBreak = false;
 bool onDrink = false;
 int drinkInc = 0;
 int maxDrink = 50;
+int minuteDeg = 0;
+int hourDeg = 270;
+int newProg;
+int oldProg = 0;
 
 char *deskToys[] = {
         "lamp.png",
@@ -96,6 +102,7 @@ void sceneRenderFrame() {
             if (breakOffset > 200){
                 onBreak = false;
                 breakOffset = 0;
+                switchMode();
             }
         }
 
@@ -108,8 +115,29 @@ void sceneRenderFrame() {
             drinkInc = 0;
         }
 
+        newProg = (int)timeProgress;
+
+
+        if(newProg != oldProg) {
+            if (newProg % 5 == 0) {
+                minuteDeg += 30;
+                if (newProg % 60 == 0) {
+                    hourDeg += 30;
+                }
+            }
+        }
+        oldProg = newProg;
+
         Sprite sprite = makeSimpleSprite("office-bg.png");
         drawSprite(sprite, makeCoord(screenBounds.x/2, screenBounds.y/2));
+        // clock
+        Sprite clock = makeSimpleSprite("clockface.png");
+        drawSprite(clock, makeCoord(screenBounds.x/2+100, screenBounds.y/2-85));
+        Sprite minHand = makeSimpleSprite("minutehand.png");
+        drawSpriteFull(minHand, makeCoord(screenBounds.x/2+100, screenBounds.y/2-85),1,minuteDeg);
+        Sprite hrHand = makeSimpleSprite("hourhand.png");
+        drawSpriteFull(hrHand, makeCoord(screenBounds.x/2+100, screenBounds.y/2-85),1,hourDeg);
+
         Sprite leg1 = makeSimpleSprite("leg.png");
         drawSprite(leg1, makeCoord(screenBounds.x/2 - xOffset - breakOffset + drinkOffset, screenBounds.y/2 + yOffset + 30 - bobBodyInc));
         Sprite leg2 = makeSimpleSprite("leg.png");
@@ -117,13 +145,13 @@ void sceneRenderFrame() {
         Sprite chair1 = makeSimpleSprite("chair-bottom-1.png");
         drawSprite(chair1, makeCoord(screenBounds.x/2 - xOffset + drinkOffset, screenBounds.y/2 + yOffset + 31));
         if (drinkInc < maxDrink/2) {
-            if (randomNo > 90) {
+            if (randomNo > 99) {
                 Sprite coffee = makeSimpleSprite("coffee.png");
-                drawSprite(coffee, makeCoord(235/*ceil(coffeePos)*/, screenBounds.y / 2 + 5));
+                drawSprite(coffee, makeCoord(228/*ceil(coffeePos)*/, screenBounds.y / 2 + 12));
             }
             else {
                 Sprite energydrink = makeSimpleSprite("energydrink.png");
-                drawSprite(energydrink, makeCoord(235/*ceil(coffeePos)*/, screenBounds.y / 2 + 5));
+                drawSprite(energydrink, makeCoord(228/*ceil(coffeePos)*/, screenBounds.y / 2 + 12));
             }
         }
         if(toyOn){
@@ -139,7 +167,7 @@ void sceneRenderFrame() {
         //drawSprite(chair1, makeCoord(screenBounds.x/2 - xOffset, screenBounds.y/2 + yOffset));
         if (onDrink && drinkInc < maxDrink/2){
             Sprite arm = makeSimpleSprite("arm.png");
-            drawSprite(arm, makeCoord(screenBounds.x/2 - xOffset - breakOffset + drinkOffset, screenBounds.y/2 + yOffset - bobBodyInc));
+            drawSprite(arm, makeCoord(screenBounds.x/2 - xOffset - breakOffset + drinkOffset + 5, screenBounds.y/2 + yOffset - bobBodyInc - 20));
             Sprite body = makeSimpleSprite("body-yellow.png");
             drawSprite(body, makeCoord(screenBounds.x/2 - xOffset - breakOffset + drinkOffset, screenBounds.y/2 + yOffset - bobBodyInc));
         }
@@ -168,19 +196,24 @@ void initScene() {
 
         for (int i = 0; i < MAX_PROPS; i++) {
             Sprite sprite;
-			switch (randomMq(0, 6)) {
-                case 0:
-					sprite = makeSimpleSprite("plant.png");
-                    break;
-                case 1:
-                    sprite = makeSimpleSprite("tree.png");
-                    break;
+            if (!aggro && i == 6){
+                sprite = makeSimpleSprite("doormale.png");
+            }else if(!aggro && i==7){
+                sprite = makeSimpleSprite("doorfemale.png");
+            }else {
+                switch (randomMq(0, 6)) {
+                    case 0:
+                        sprite = makeSimpleSprite("plant.png");
+                        break;
+                    case 1:
+                        sprite = makeSimpleSprite("tree.png");
+                        break;
 //                case 2:
 //                    sprite = makeSimpleSprite("lamp.png");
 //                    break;
-				case 2:
-					sprite = makeSimpleSprite("newtonscradle.png");
-					break;
+                    case 2:
+                        sprite = makeSimpleSprite("newtonscradle.png");
+                        break;
 //				case 3:
 //					sprite = makeSimpleSprite("coffee.png");
 //					break;
@@ -190,12 +223,13 @@ void initScene() {
 //				case 6:
 //					sprite = makeSimpleSprite("clockon.png");
 //					break;
-				case 3:
-					sprite = makeSimpleSprite("cat.png");
-					break;
-				case 4:
-					sprite = makeSimpleSprite("cactus.png");
-					break;
+                    case 3:
+                        sprite = makeSimpleSprite("cat.png");
+                        break;
+                    case 4:
+                        sprite = makeSimpleSprite("cactus.png");
+                        break;
+                }
             }
 			Prop prop = {
 				sprite,

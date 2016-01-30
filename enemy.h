@@ -9,5 +9,6 @@ extern void enemyNameRenderFrame(void);
 extern void initEnemy(void);
 extern void enemyAnimateFrame(void);
 extern void enemyShadowRenderFrame(void);
+extern bool aggro;
 
 #endif

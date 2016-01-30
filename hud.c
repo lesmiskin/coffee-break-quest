@@ -113,6 +113,26 @@ void hudRenderFrame(void) {
 		drawSprite(makeSimpleSprite("prod.png"), makeCoord(12, 40));
 		drawSprite(makeSimpleSprite("grind.png"), makeCoord(11, 55));
 
+		if(alertness <= 10){
+			drawSprite(makeSimpleSprite("warning.png"), makeCoord(45, 10));
+			writeFont("press d to drink", makeCoord(55,10));
+			// warning + "press D to drink"
+		}
+		if(bladder >= 90){
+			drawSprite(makeSimpleSprite("warning.png"), makeCoord(45, 30));
+			writeFont("press b to break", makeCoord(55,30));
+			// warning + "press B to break"
+		}
+		if(hygiene <= 40){
+			drawSprite(makeSimpleSprite("warning.png"), makeCoord(45, 20));
+			// warning
+		}
+		if(timeProgress >= 420){
+			drawSprite(makeSimpleSprite("warning.png"), makeCoord(45, 55));
+			writeFont("work day almost over", makeCoord(55,55));
+			// warning + "day almost over"
+		}
+
 		//Draw plumes.
 		if(plume.origin.x > 0) {
 			if(timer(&plume.spawnTime, 500)) {
