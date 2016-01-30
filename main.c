@@ -62,7 +62,13 @@ const int GAME_HZ = 1000 / 60;			//60fps
 
 bool running = true;
 SDL_Window *window = NULL;
-Coord windowSize = { 1280, 960 };   // 320x240
+
+#ifdef _WIN32
+#elif __APPLE__
+    Coord windowSize = { 640, 480};
+#elif __linux__
+    Coord windowSize = { 1280, 960 };   // 320x240
+#endif
 
 static void initSDL(void) {
     SDL_Init(/*SDL_INIT_AUDIO | */SDL_INIT_JOYSTICK | SDL_INIT_HAPTIC);
