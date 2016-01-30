@@ -26,13 +26,14 @@
 //TODO: Numbers should flash.
 //TODO: Large messages that pop up on the screen: "YOU FAIL IT"
 
-//COMBAT
+//COMBAT / LES
 //TODO: Introduce enemies.
 //TODO: Enemies shoot coffee cups.
 //TODO: When hit, pushes them away.
 //TODO: Goal is to push them all offscreen.
 //TODO: Enemies cause GAME OVER state (b&w background).
 //TODO: Once killed, game loops back to start.
+//TODO: Detect resolution and size accordingly.
 
 //*************************************************************
 

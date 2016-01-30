@@ -111,6 +111,28 @@ static void loadImages(void) {
 		{ "combat-player.png" },
 		{ "combat-collegue.png" },
 		{ "shot.png" },
+
+        { "steve-calmstep.png" },
+        { "steve-aggro.png" },
+        { "chair-bottom-1.png" },
+        { "carpet.png" },
+
+        { "clockoff.png" },
+        { "clockon.png" },
+        { "dilbertaggro.png" },
+        { "dilbertcalm.png" },
+        { "dilbertcalmstep.png" },
+        { "dwightaggro.png" },
+        { "dwightcalm.png" },
+        { "dwightcalmstep.png" },
+        { "lamp.png" },
+        { "plant.png" },
+        { "newtonscradle.png" },
+        { "rubikscube.png" },
+        { "rubikscubesolved.png" },
+        { "tree.png" },
+        { "timcalm.png" },
+        { "timcalmstep.png" },
 	};
 
     //Infer asset path from current directory.
