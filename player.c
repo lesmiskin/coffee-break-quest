@@ -5,9 +5,6 @@
 #include "hud.h"
 #include "renderer.h"
 
-Coord pos = { 50, 50 };
-double MOVE_INC = 2;
-double SHOT_SPEED = 2;
 typedef struct {
 	Coord coord;
 	Coord target;
@@ -15,12 +12,15 @@ typedef struct {
 } Shot;
 
 #define MAX_SHOTS 100
+const int SHOT_DELAY = 15;
+double MOVE_INC = 2;
+double SHOT_SPEED = 2;
+
+Coord pos = { 50, 50 };
 double targetInc = 0;
 bool shotDir = false;
 Shot shots[255];
 int shotInc = 0;
-bool shooting = false;
-const int SHOT_DELAY = 15;
 long lastShot;
 
 void drink(void) {
@@ -45,7 +45,7 @@ void shoot(void) {
 		shotInc = 0;
 	}
 
-	Shot shot = { makeCoord(pos.x, pos.y/*+10*/), makeCoord(1.5, targetInc), shotInc };
+	Shot shot = { makeCoord(pos.x, pos.y+10), makeCoord(1.5, targetInc), shotInc };
 	shots[shotInc++] = shot;
 
 	if(shotDir == true && targetInc > 1) {
