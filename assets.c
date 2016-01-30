@@ -144,6 +144,16 @@ static void loadImages(void) {
         { "leg.png" },
         { "cat.png" },
         { "cat1.png" },
+        { "clockface.png" },
+        { "minutehand.png" },
+        { "hourhand.png" },
+        { "doormale.png" },
+        { "doorfemale.png" },
+        { "bsod.png" },
+        { "screenblank.png" },
+        { "screentext.png" },
+        { "warning.png" },
+
 
         { "name-owen.png" },
         { "name-dilbert.png" },

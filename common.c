@@ -14,8 +14,7 @@ GameMode mode = MODE_TITLE;
 void changeMode(GameMode newMode) {
     mode = newMode;
 
-    if(mode == MODE_OFFICE) {
-//        mode = MODE_COMBAT;
+    if(mode == MODE_OFFICE || mode == MODE_COMBAT) {
         initPlayer();
         initEnemy();
         initScene();
