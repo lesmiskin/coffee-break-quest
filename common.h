@@ -30,5 +30,6 @@ extern double sineInc(double offset, double *sineInc, double speed, double magni
 extern double cosInc(double offset, double *sineInc, double speed, double magnitude);
 extern double getAngle(Coord a, Coord b);
 extern Coord getStep(Coord a, Coord b, double speed, bool negativeMagic);
+extern double randomNo;
 
 #endif

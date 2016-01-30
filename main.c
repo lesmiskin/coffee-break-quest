@@ -13,11 +13,7 @@
 #include "enemy.h"
 
 //EMILY WORK
-//TODO: Game mechanics and calculations.
-    //TODO: Caff reduces over time.
-    //TODO: Prod increases proportional to the caffiene.
-    //TODO: Hygene decreases when breaks are not taken.
-    //TODO: Bladder increases when breaks are not taken.
+//TODO: Game mechanic fine tuning
 //TODO: Put props in the Office game.
 //TODO: Update sprites in Office game.
 //TODO: Hook up proper character sprites in Combat game.
@@ -57,6 +53,7 @@
 //TODO: Coffee cups cause "hit" graphic on player.
 //TODO: Forced re-entry upon game exit (Y/Y etc.)
 //TODO: Rotating clock hands.
+//TODO: 'x' press bug: Are we clearing the arrays of out-of-range shots etc?
 
 
 static const char *GAME_TITLE = "Coffee Break Quest";
@@ -95,6 +92,7 @@ static void initWindow(void) {
         SDL_WINDOW_OPENGL
     );
     assert(window != NULL);
+    randomNo = randomMq(1,100);
 }
 
 static void shutdownWindow(void) {

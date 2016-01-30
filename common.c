@@ -6,6 +6,7 @@
 #include "scene.h"
 
 static const double RADIAN_CIRCLE = 6.28;
+double randomNo;
 
 GameMode mode = MODE_OFFICE;
 

@@ -10,6 +10,7 @@
       <sourceFolder url="file://$MODULE_DIR$/common.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/main.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/meter.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enemy.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/player.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/scene.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/hud.h" isTestSource="false" />
@@ -18,6 +19,7 @@
       <sourceFolder url="file://$MODULE_DIR$/hud.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/input.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enemy.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/assets.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/cmake/FindSDL2.cmake" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/cmake/FindSDL2_Mixer.cmake" isTestSource="false" />

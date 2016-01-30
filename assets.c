@@ -102,7 +102,10 @@ static void loadImages(void) {
         { "caff.png" },
         { "grind.png" },
         { "body-yellow.png" },
+        { "bodyyellowdrink.png" },
         { "head-black.png" },
+        { "arm.png" },
+        { "armdrink.png" },
         { "chair-bottom.png" },
         { "chair-top.png" },
         { "coffee.png" },
@@ -135,6 +138,7 @@ static void loadImages(void) {
         { "timcalm.png" },
         { "timcalmstep.png" },
         { "cactus.png" },
+        { "leg.png" },
         { "cat.png" },
         { "cat1.png" },
 	};

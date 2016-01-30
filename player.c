@@ -4,6 +4,8 @@
 #include "input.h"
 #include "hud.h"
 #include "renderer.h"
+#include "meter.h"
+#include "scene.h"
 
 typedef struct {
 	Coord coord;
@@ -25,14 +27,29 @@ long lastShot;
 int walkInc = 0;
 bool playerDir = false;
 
+double hyg_inc = 10;
+double hyg_max = 100;
+
 void drink(void) {
 	play("drink.wav");
 	spawnPlume(PLUME_DRINK);
+	bladder++;
+	alertness++;
+	onDrink = true;
 }
 
 void takeBreak(void) {
 	play("break.wav");
 	spawnPlume(PLUME_BREAK);
+	bladder=0;
+	work = (work < 1) ? 0 : work--;
+	if (hygiene >= hyg_max - hyg_inc) {
+		hygiene = hyg_max;
+	}
+	else {
+		hygiene+=hyg_inc;
+	}
+	onBreak = true;
 }
 
 void shoot(void) {
