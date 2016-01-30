@@ -11,18 +11,23 @@
 #include "meter.h"
 #include "hud.h"
 
-//TODO: Coffee drinking mechanic: Raises productivity, raises bladder.
+//REQUIRED
+//TODO: Game mode (switches between main, and minigame modes).
+//TODO: Combat mechanics.
 
+//TODO: Sprite, moves around the screen in response to keypresses.
+//TODO: Projectile facility (rapid fire / stream).
+//TODO: Enemy combatants. Random sine motion, but move towards player.
+//TODO: When hit, pushes them away.
+//TODO: Goal is to push them all offscreen.
+
+//*************************************************************
 
 //GAMEPLAY
 //TODO: Caff reduces over time.
 //TODO: Prod increases proportional to the caffiene.
 //TODO: Hygene decreases when breaks are not taken.
 //TODO: Bladder increases when breaks are not taken.
-
-//REQUIRED
-//TODO: Game mode (switches between main, and minigame modes).
-//TODO: Combat mechanics.
 
 //*************************************************************
 
@@ -36,7 +41,7 @@
 //IF TIME
 //TODO: Meters.
 //TODO: Particle effect for game-over.
-
+//TODO: Random objects on table.
 
 
 
