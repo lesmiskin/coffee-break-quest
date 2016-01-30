@@ -65,7 +65,7 @@ void enemyGameFrame(void) {
 		if(timer(&enemies[i].lastThrow, enemies[i].nextThrow)) {
 			cupInc = (cupInc == MAX_CUPS ? 0 : cupInc + 1);
 
-			Cup cup = { enemies[i].coord, cupStep, random(0, 360) };
+			Cup cup = { enemies[i].coord, cupStep, randomMq(0, 360) };
 			cups[cupInc] = cup;
 			enemies[i].lastThrow = clock();
 			enemies[i].state = STATE_THROW;
@@ -146,7 +146,7 @@ void initEnemy(void) {
 			clock(),
 			clock(),
 			chance(50) ? throwMin : throwMax,
-			random(0, WALK_ANIMS-1)
+			randomMq(0, WALK_ANIMS-1)
 		};
 
 		enemies[i] = enemy;
