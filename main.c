@@ -20,12 +20,11 @@
 //TODO: Put props in the Office game.
 //TODO: Update sprites in Office game.
 //TODO: Hook up proper character sprites in Combat game.
-
-//OFFICE
+//TODO: Get up / come back "animation"
+//TODO: Coffee drinking animation.
+//TODO: Sigh for blad expulsion.
 //TODO: Numbers should flash.
 //TODO: Large messages that pop up on the screen: "YOU FAIL IT"
-//TODO: Sigh for blad expulsion.
-//TODO: Get up / come back "animation"
 
 //COMBAT
 //TODO: Introduce enemies.
