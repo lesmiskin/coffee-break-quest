@@ -11,34 +11,35 @@
 #include "meter.h"
 #include "hud.h"
 
-//REQUIRED
-//TODO: Game mode (switches between main, and minigame modes).
-//TODO: Combat mechanics.
+//EMILY WORK
+//TODO: Game mechanics and calculations.
+    //TODO: Caff reduces over time.
+    //TODO: Prod increases proportional to the caffiene.
+    //TODO: Hygene decreases when breaks are not taken.
+    //TODO: Bladder increases when breaks are not taken.
+//TODO: Put props in the Office game.
+//TODO: Update sprites in Office game.
+//TODO: Hook up proper character sprites in Combat game.
 
-//TODO: Sprite, moves around the screen in response to keypresses.
-//TODO: Projectile facility (rapid fire / stream).
-//TODO: Enemy combatants. Random sine motion, but move towards player.
-//TODO: When hit, pushes them away.
-//TODO: Goal is to push them all offscreen.
-
-//*************************************************************
-
-//GAMEPLAY
-//TODO: Caff reduces over time.
-//TODO: Prod increases proportional to the caffiene.
-//TODO: Hygene decreases when breaks are not taken.
-//TODO: Bladder increases when breaks are not taken.
-
-//*************************************************************
-
-//MINOR / ANYTIME
+//OFFICE
 //TODO: Numbers should flash.
 //TODO: Large messages that pop up on the screen: "YOU FAIL IT"
-//TODO: Meters if possible.
 //TODO: Sigh for blad expulsion.
 //TODO: Get up / come back "animation"
 
+//COMBAT
+//TODO: Introduce enemies.
+//TODO: Enemies shoot coffee cups.
+//TODO: When hit, pushes them away.
+//TODO: Goal is to push them all offscreen.
+//TODO: Enemies cause GAME OVER state (b&w background).
+//TODO: Once killed, game loops back to start.
+
+//*************************************************************
+
 //IF TIME
+//TODO: Tapping on keyboard sound effect.
+//TODO: Tapping and bobbing animations speed up when time is sped up.
 //TODO: Meters.
 //TODO: Particle effect for game-over.
 //TODO: Random objects on table.
