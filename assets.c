@@ -101,6 +101,14 @@ static void loadImages(void) {
         { "hyg.png" },
         { "caff.png" },
         { "grind.png" },
+
+        { "body-yellow.png" },
+        { "head-black.png" },
+        { "chair-bottom.png" },
+        { "chair-top.png" },
+        { "coffee.png" },
+        { "energydrink.png" },
+        { "office-bg.png" },
     };
 
     //Infer asset path from current directory.

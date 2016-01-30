@@ -52,13 +52,14 @@ void hudGameFrame(void) {
 }
 
 void hudRenderFrame(void) {
-
+	//Stat text.
 	writeText(alertness, makeCoord(30, 10));
 	writeText(hygiene, makeCoord(30, 20));
 	writeText(bladder, makeCoord(30, 30));
 	writeText(work, makeCoord(30, 40));
 	writeText(timeProgress, makeCoord(30, 55));
 
+	//Captions
 	drawSprite(makeSimpleSprite("caff.png"), makeCoord(12, 10));
 	drawSprite(makeSimpleSprite("hyg.png"), makeCoord(12, 20));
 	drawSprite(makeSimpleSprite("blad.png"), makeCoord(12, 30));

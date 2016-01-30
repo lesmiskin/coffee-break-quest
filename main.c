@@ -11,14 +11,33 @@
 #include "meter.h"
 #include "hud.h"
 
-//TODO: Meter captions.
+//TODO: Coffee drinking mechanic: Raises productivity, raises bladder.
+
+
+//GAMEPLAY
+//TODO: Caff reduces over time.
+//TODO: Prod increases proportional to the caffiene.
+//TODO: Hygene decreases when breaks are not taken.
+//TODO: Bladder increases when breaks are not taken.
+
+//REQUIRED
 //TODO: Game mode (switches between main, and minigame modes).
 //TODO: Combat mechanics.
 
-//TODO: Coffee drinking mechanic: Raises productivity, raises bladder.
+//*************************************************************
+
+//MINOR / ANYTIME
 //TODO: Numbers should flash.
 //TODO: Large messages that pop up on the screen: "YOU FAIL IT"
 //TODO: Meters if possible.
+//TODO: Sigh for blad expulsion.
+//TODO: Get up / come back "animation"
+
+//IF TIME
+//TODO: Meters.
+//TODO: Particle effect for game-over.
+
+
 
 
 
