@@ -7,15 +7,8 @@
 #include "meter.h"
 #include "scene.h"
 
-typedef struct {
-	Coord coord;
-	Coord target;
-	double inc;
-} Shot;
-
-#define MAX_SHOTS 100
 const int SHOT_DELAY = 15;
-double MOVE_INC = 2;
+double MOVE_INC = 1.4;
 double SHOT_SPEED = 2;
 
 Coord pos = { 50, 50 };
@@ -26,6 +19,7 @@ int shotInc = 0;
 long lastShot;
 int walkInc = 0;
 bool playerDir = false;
+double health = 100;
 
 double hyg_inc = 10;
 double hyg_max = 100;
@@ -65,12 +59,9 @@ void shoot(void) {
 	}
 
 	Coord target = makeCoord(
-		playerDir ? 1.5 : -1.5,
+		playerDir ? 2 : -2,
 		targetInc
 	);
-
-	Shot shot = { makeCoord(pos.x, pos.y+7), target, shotInc };
-	shots[shotInc++] = shot;
 
 	if(shotDir == true && targetInc > 1) {
 		shotDir = false;
@@ -82,6 +73,10 @@ void shoot(void) {
 	}else{
 		targetInc -= 0.15;
 	}
+
+	double xPos = playerDir ? 7 : -7;
+	Shot shot = { makeCoord(pos.x + xPos, pos.y+5), target, shotInc };
+	shots[shotInc++] = shot;
 }
 
 bool isWalking(void) {
@@ -95,6 +90,13 @@ void playerAnimateFrame(void) {
 	if(isWalking()) {
 		walkInc = (walkInc == 0) ? 1 : 0;
 	}
+}
+
+void playerShadowFrame(void) {
+	if(mode != MODE_COMBAT) return;
+
+	Sprite shadow = makeSimpleSprite("shadow.png");
+	drawSprite(shadow, deriveCoord(pos, 0, 21));
 }
 
 void playerRenderFrame(void) {
@@ -126,6 +128,11 @@ void playerRenderFrame(void) {
 
 void playerGameFrame(void) {
 	if(mode == MODE_COMBAT) {
+		if(health <= 0) {
+			//TODO: Game over.
+			switchMode();
+		}
+
 		if (checkCommand(CMD_PLAYER_LEFT)) {
 			pos.x -= MOVE_INC;
 			playerDir = false;
@@ -154,4 +161,5 @@ void playerGameFrame(void) {
 
 void initPlayer() {
 	lastShot = clock();
+	memset(shots, 0, sizeof(shots));
 }

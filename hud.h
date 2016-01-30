@@ -8,10 +8,11 @@ typedef enum {
 	PLUME_BREAK,
 } PlumeType;
 
-void spawnPlume(PlumeType type);
-void initHud(void);
-void writeText(int amount, Coord pos);
-void hudRenderFrame(void);
-void hudGameFrame(void);
+extern void spawnPlume(PlumeType type);
+extern void initHud(void);
+extern void writeText(int amount, Coord pos);
+extern void writeFont(char *text, Coord pos);
+extern void hudRenderFrame(void);
+extern void hudGameFrame(void);
 
 #endif

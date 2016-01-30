@@ -2,6 +2,7 @@
 #include "renderer.h"
 #include "common.h"
 #include "assets.h"
+#include "hud.h"
 
 #define MAX_PROPS 8
 
@@ -72,15 +73,21 @@ void sceneAnimateFrame() {
 }
 
 void sceneRenderFrame() {
-    if(mode == MODE_COMBAT) {
+	if(mode == MODE_COMBAT) {
         Sprite sprite = makeSimpleSprite("carpet.png");
         drawSprite(sprite, makeCoord(screenBounds.x/2, screenBounds.y/2));
 
 		for(int i = 0; i < MAX_PROPS; i++) {
+			//Hacky check for unset props.
+			if(props[i].sprite.size.y == 0 || props[i].sprite.texture == NULL) continue;
+
 			drawSprite(props[i].sprite, props[i].coord);
 		}
 
-    }else{
+		writeFont("this is a test sentence", makeCoord(50,50));
+		writeFont("this is a test sentence", makeCoord(30,30));
+
+	}else{
         int xOffset = 3;
         int yOffset = 30;
 
@@ -157,7 +164,8 @@ void sceneRenderFrame() {
 void initScene() {
 	propInc = 0;
 
-    if(mode == MODE_COMBAT) {
+	if(mode == MODE_COMBAT) {
+
         for (int i = 0; i < MAX_PROPS; i++) {
             Sprite sprite;
 			switch (randomMq(0, 6)) {

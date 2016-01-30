@@ -27,6 +27,7 @@ extern void switchMode(void);
 extern SDL_Window *window;
 extern bool running;
 extern Coord makeCoord(double x, double y);
+extern Coord deriveCoord(Coord original, double xOffset, double yOffset);
 extern Coord zeroCoord();
 extern bool timer(long *lastTime, double hertz);
 extern bool isDue(long now, long lastTime, double hertz);

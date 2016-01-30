@@ -46,6 +46,51 @@ void writeText(int amount, Coord pos) {
 	}
 }
 
+void writeFont(char *text, Coord pos) {
+	for(int i=0; i < strlen(text); i++) {
+		//Print text if it's not a space.
+		if(text[i] != ' ') {
+
+			char fontFile[50];
+			sprintf(fontFile, "font-%c.png", text[i]);
+			Sprite sprite = makeSimpleSprite(fontFile);
+			drawSprite(sprite, makeCoord(pos.x, pos.y));
+
+			if(text[i] == 'q') {
+				pos.x += 4;
+			}else if(text[i] == 'w' || text[i] == 'm') {
+				pos.x += 5;
+			}else if(text[i] == 'o') {
+				pos.x += 5;
+			}else if(text[i] == 'u') {
+				pos.x += 6;
+			}else if(text[i] == 'i' || text[i] == 'e') {
+				pos.x += 3;
+			}else{
+				pos.x += sprite.size.x - 1;
+			}
+		}else{
+			pos.x += 4;
+		}
+	}
+
+
+//	drawSprite(makeSimpleSprite("chair-bottom.png"), makeCoord(50, 50));
+//	for(int i=0; i < 10; i++) {
+//	}
+//
+//
+//	if(amount == 0) {
+//		drawSprite(letters[0], pos);
+//	}else{
+//		while(amount != 0) {
+//			drawSprite(letters[amount % 10], pos);
+//			amount /= 10;
+//			pos.x -= LETTER_WIDTH;
+//		}
+//	}
+}
+
 void hudGameFrame(void) {
 	if(plume.origin.x > 0) {
 		plume.origin.y -= 2;

@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include "enemy.h"
 #include "scene.h"
+#include "player.h"
 
 static const double RADIAN_CIRCLE = 6.28;
 double randomNo;
@@ -13,6 +14,7 @@ GameMode mode = MODE_OFFICE;
 void switchMode(void) {
     if(mode == MODE_OFFICE) {
         mode = MODE_COMBAT;
+        initPlayer();
         initEnemy();
         initScene();
     }else{
@@ -145,3 +147,13 @@ Rect makeSquareBounds(Coord origin, double size) {
     return makeBounds(origin, size, size);
 }
 
+Coord deriveCoord(Coord original, double xOffset, double yOffset) {
+    original.x += xOffset;
+    original.y += yOffset;
+    return original;
+}
+
+Rect makeRect(double x, double y, double width, double height) {
+    Rect rect = { x, y, width, height };
+    return rect;
+}

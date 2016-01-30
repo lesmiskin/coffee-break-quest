@@ -5,7 +5,9 @@
 
 extern void enemyGameFrame(void);
 extern void enemyRenderFrame(void);
+extern void enemyNameRenderFrame(void);
 extern void initEnemy(void);
 extern void enemyAnimateFrame(void);
+extern void enemyShadowRenderFrame(void);
 
 #endif
