@@ -8,6 +8,13 @@ typedef struct {
     double x, y;
 } Coord;
 
+typedef enum {
+	MODE_OFFICE,
+	MODE_COMBAT
+} GameMode;
+
+extern GameMode mode;
+extern void switchMode(void);
 extern SDL_Window *window;
 extern bool running;
 extern Coord makeCoord(double x, double y);

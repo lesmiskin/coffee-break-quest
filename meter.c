@@ -35,10 +35,12 @@ void slowdown() {
 }
 
 void meterGameFrame(void) {
-	//Quit game once time is up.
-	if(timeProgress >= TIME_END) quit();
-	timeProgress += (TIME_INC * timeRate);
+	if(mode == MODE_OFFICE) {
+		//Quit game once time is up.
+		if(timeProgress >= TIME_END) quit();
+		timeProgress += (TIME_INC * timeRate);
 
-	if (checkCommand(CMD_GAME_SLOWDOWN)) slowdown();
-	if (checkCommand(CMD_GAME_SPEEDUP)) speedup();
+		if (checkCommand(CMD_GAME_SLOWDOWN)) slowdown();
+		if (checkCommand(CMD_GAME_SPEEDUP)) speedup();
+	}
 }

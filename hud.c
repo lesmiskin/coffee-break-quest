@@ -53,28 +53,30 @@ void hudGameFrame(void) {
 }
 
 void hudRenderFrame(void) {
-	//Stat text.
-	writeText(alertness, makeCoord(30, 10));
-	writeText(hygiene, makeCoord(30, 20));
-	writeText(bladder, makeCoord(30, 30));
-	writeText(work, makeCoord(30, 40));
-	writeText(timeProgress, makeCoord(30, 55));
+	if(mode == MODE_OFFICE) {
+		//Stat text.
+		writeText(alertness, makeCoord(30, 10));
+		writeText(hygiene, makeCoord(30, 20));
+		writeText(bladder, makeCoord(30, 30));
+		writeText(work, makeCoord(30, 40));
+		writeText(timeProgress, makeCoord(30, 55));
 
-	//Captions
-	drawSprite(makeSimpleSprite("caff.png"), makeCoord(12, 10));
-	drawSprite(makeSimpleSprite("hyg.png"), makeCoord(12, 20));
-	drawSprite(makeSimpleSprite("blad.png"), makeCoord(12, 30));
-	drawSprite(makeSimpleSprite("prod.png"), makeCoord(12, 40));
-	drawSprite(makeSimpleSprite("grind.png"), makeCoord(11, 55));
+		//Captions
+		drawSprite(makeSimpleSprite("caff.png"), makeCoord(12, 10));
+		drawSprite(makeSimpleSprite("hyg.png"), makeCoord(12, 20));
+		drawSprite(makeSimpleSprite("blad.png"), makeCoord(12, 30));
+		drawSprite(makeSimpleSprite("prod.png"), makeCoord(12, 40));
+		drawSprite(makeSimpleSprite("grind.png"), makeCoord(11, 55));
 
-	//Draw plumes.
-	if(plume.origin.x > 0) {
-		if(timer(&plume.spawnTime, 500)) {
-			plume.origin.x = 0;
-			return;
-		}else{
-			Sprite sprite = makeSimpleSprite(plume.type == PLUME_BREAK ? "break.png" : "drink.png");
-			drawSprite(sprite, makeCoord(screenBounds.x/2, plume.origin.y));
+		//Draw plumes.
+		if(plume.origin.x > 0) {
+			if(timer(&plume.spawnTime, 500)) {
+				plume.origin.x = 0;
+				return;
+			}else{
+				Sprite sprite = makeSimpleSprite(plume.type == PLUME_BREAK ? "break.png" : "drink.png");
+				drawSprite(sprite, makeCoord(screenBounds.x/2, plume.origin.y));
+			}
 		}
 	}
 }

@@ -5,6 +5,16 @@
 
 static const double RADIAN_CIRCLE = 6.28;
 
+GameMode mode = MODE_OFFICE;
+
+void switchMode(void) {
+    if(mode == MODE_OFFICE) {
+        mode = MODE_COMBAT;
+    }else{
+        mode = MODE_OFFICE;
+    }
+}
+
 long ticsToMilliseconds(long tics) {
     //we want the duration version of the platform-independent seconds, so we / 1000.
     long platformAgnosticMilliseconds = CLOCKS_PER_SEC / 1000;

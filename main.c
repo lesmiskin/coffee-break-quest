@@ -42,7 +42,14 @@
 //TODO: Meters.
 //TODO: Particle effect for game-over.
 //TODO: Random objects on table.
-
+//TODO: Cheat code to force dismemberment (Konami code - learning is FUN!).
+//TODO: Ties streaming behind them?
+//TODO: Monochrome effect.
+//TODO: Tapping sound effect for keyboard.
+//TODO: Hands going up and down.
+//TODO: Feet going up and down.
+//TODO: Control menu in bottom right of screen.
+//TODO: Exploding cat.
 
 
 
@@ -105,6 +112,7 @@ int main()  {
     initRenderer();
     initAssets();
 	initHud();
+    initPlayer();
 
     long lastRenderFrameTime = clock();
     long lastGameFrameTime = lastRenderFrameTime;
@@ -130,6 +138,7 @@ int main()  {
         double renderFPS;
         if(timer(&lastRenderFrameTime, RENDER_HZ)) {
             sceneRenderFrame();
+			playerRenderFrame();
 			hudRenderFrame();
             updateCanvas();
         }

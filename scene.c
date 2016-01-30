@@ -1,5 +1,6 @@
 #include "scene.h"
 #include "renderer.h"
+#include "common.h"
 #include "assets.h"
 
 double bobHeadInc = 1;
@@ -40,20 +41,25 @@ void sceneAnimateFrame() {
 }
 
 void sceneRenderFrame() {
-    int xOffset = 3;
-    int yOffset = 30;
-    
-    Sprite sprite = makeSimpleSprite("office-bg.png");
-    drawSprite(sprite, makeCoord(screenBounds.x/2, screenBounds.y/2));
-    Sprite chair1 = makeSimpleSprite("chair-bottom.png");
-    drawSprite(chair1, makeCoord(screenBounds.x/2 - xOffset, screenBounds.y/2 + yOffset));
-    Sprite body = makeSimpleSprite("body-yellow.png");
-    drawSprite(body, makeCoord(screenBounds.x/2 - xOffset, screenBounds.y/2 + yOffset - bobBodyInc));
-    Sprite chair2 = makeSimpleSprite("chair-top.png");
-    drawSprite(chair2, makeCoord(screenBounds.x/2 - xOffset, screenBounds.y/2 + yOffset));
-    Sprite head = makeSimpleSprite("head-black.png");
-    drawSprite(head, makeCoord(screenBounds.x/2 - xOffset, screenBounds.y/2 + yOffset + 1 - bobHeadInc));
+    if(mode == MODE_COMBAT) {
+        SDL_SetRenderDrawColor(renderer, 255, 0, 0, 0);
+        SDL_RenderClear(renderer);
+    }else{
+        int xOffset = 3;
+        int yOffset = 30;
 
-    Sprite coffee = makeSimpleSprite("coffee.png");
-    drawSprite(coffee, makeCoord(235/*ceil(coffeePos)*/, screenBounds.y/2 + 5));
+        Sprite sprite = makeSimpleSprite("office-bg.png");
+        drawSprite(sprite, makeCoord(screenBounds.x/2, screenBounds.y/2));
+        Sprite chair1 = makeSimpleSprite("chair-bottom.png");
+        drawSprite(chair1, makeCoord(screenBounds.x/2 - xOffset, screenBounds.y/2 + yOffset));
+        Sprite body = makeSimpleSprite("body-yellow.png");
+        drawSprite(body, makeCoord(screenBounds.x/2 - xOffset, screenBounds.y/2 + yOffset - bobBodyInc));
+        Sprite chair2 = makeSimpleSprite("chair-top.png");
+        drawSprite(chair2, makeCoord(screenBounds.x/2 - xOffset, screenBounds.y/2 + yOffset));
+        Sprite head = makeSimpleSprite("head-black.png");
+        drawSprite(head, makeCoord(screenBounds.x/2 - xOffset, screenBounds.y/2 + yOffset + 1 - bobHeadInc));
+
+        Sprite coffee = makeSimpleSprite("coffee.png");
+        drawSprite(coffee, makeCoord(235/*ceil(coffeePos)*/, screenBounds.y/2 + 5));
+    }
 }

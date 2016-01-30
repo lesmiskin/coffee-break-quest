@@ -101,7 +101,6 @@ static void loadImages(void) {
         { "hyg.png" },
         { "caff.png" },
         { "grind.png" },
-
         { "body-yellow.png" },
         { "head-black.png" },
         { "chair-bottom.png" },
@@ -109,7 +108,10 @@ static void loadImages(void) {
         { "coffee.png" },
         { "energydrink.png" },
         { "office-bg.png" },
-    };
+		{ "combat-player.png" },
+		{ "combat-collegue.png" },
+		{ "shot.png" },
+	};
 
     //Infer asset path from current directory.
     char* workingPath = SDL_GetBasePath();
@@ -133,7 +135,9 @@ static void loadSounds(void) {
         { "break.wav", SOUND_VOLUME },
         { "down.wav", SOUND_VOLUME },
         { "drink.wav", SOUND_VOLUME },
-        { "up.wav", SOUND_VOLUME }
+        { "up.wav", SOUND_VOLUME },
+		{ "shoot3.wav", SOUND_VOLUME },
+		{ "fire-coffee.wav", SOUND_VOLUME },
     };
 
     soundCount = sizeof(defs) / sizeof(SoundDef);
