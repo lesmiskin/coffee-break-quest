@@ -19,5 +19,6 @@ extern void initPlayer();
 extern Coord pos;
 extern void playerAnimateFrame(void);
 extern Shot shots[255];
+extern double health;
 
 #endif

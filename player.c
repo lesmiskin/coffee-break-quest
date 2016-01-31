@@ -20,8 +20,8 @@ int shotInc = 0;
 long lastShot;
 int walkInc = 0;
 bool playerDir = false;
-double health = 100;
 bool cupCollision = false;
+double health = 100;
 
 double hyg_inc = 10;
 double hyg_max = 100;
@@ -115,6 +115,7 @@ void playerRenderFrame(void) {
 		if(inBounds(cups[j].coord, makeSquareBounds(pos, 20))) {
 			cupCollision = true;
 			cups[j].coord.x = 0;
+			health -= 10;
 		}
 	}
 
@@ -153,8 +154,7 @@ void playerRenderFrame(void) {
 void playerGameFrame(void) {
 	if(mode == MODE_COMBAT) {
 		if(health <= 0) {
-			//TODO: Game over.
-			changeMode(MODE_TITLE);
+			changeMode(MODE_COMBAT_LOST);
 		}
 
 		if (checkCommand(CMD_PLAYER_LEFT)) {
@@ -188,4 +188,5 @@ void initPlayer() {
 	memset(shots, 0, sizeof(shots));
 	pos.x = 25;
 	pos.y = 50;
+	health = 100;
 }

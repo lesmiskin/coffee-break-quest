@@ -3,6 +3,8 @@
 #include "renderer.h"
 #include "time.h"
 #include "scene.h"
+#include "enemy.h"
+#include "player.h"
 
 static Sprite letters[10];
 static const int LETTER_WIDTH = 4;
@@ -104,6 +106,11 @@ void hudGameFrame(void) {
 }
 
 void hudRenderFrame(void) {
+	if(aggro && mode == MODE_COMBAT) {
+		writeText(health, makeCoord(50, 10));
+		writeFont("health", makeCoord(10, 10));
+	}
+
 	if(mode == MODE_OFFICE) {
 		//Stat text.
 		writeText(alertness, makeCoord(30, 10));

@@ -35,24 +35,24 @@ void pollInput(void) {
 
                 SDL_Keycode keypress = event.key.keysym.scancode;
 
-
 				switch(mode) {
 					case MODE_TITLE:
-						if(keypress == SDL_SCANCODE_SPACE && firstOffice) {
+						if(keypress == SDL_SCANCODE_SPACE)
 							changeMode(MODE_OFFICE_INTRO);
-							firstOffice = false;
-						}
-						else changeMode (MODE_OFFICE);
-//							changeMode(MODE_BREAK_INTRO);
-//							changeMode(MODE_BREAK_OOPS);
-//						changeMode(MODE_COMBAT_FIRSTTIME);
-//						changeMode(MODE_COMBAT_LOST);
-//						changeMode(MODE_COMBAT_WON);
-//						changeMode(MODE_OFFICE_WON);
-//						changeMode(MODE_OFFICE_LOST);
-
 						if(keypress == SDL_SCANCODE_ESCAPE)
 							commands[CMD_QUIT] = true;
+
+						break;
+					case MODE_OFFICE_WON:
+					case MODE_OFFICE_LOST:
+					case MODE_COMBAT_WON:
+					case MODE_COMBAT_LOST:
+						if(keypress == SDL_SCANCODE_SPACE)
+							changeMode(MODE_TITLE);
+						break;
+					case MODE_BREAK_OOPS:
+						if(keypress == SDL_SCANCODE_SPACE)
+							changeMode(MODE_COMBAT);
 						break;
 					case MODE_OFFICE_INTRO:
 						if(keypress == SDL_SCANCODE_SPACE)
@@ -72,8 +72,10 @@ void pollInput(void) {
 				}
 
 //                //List of key PRESSES go here.
-//                if(keypress == SDL_SCANCODE_X)
-//                    changeMode(MODE_COMBAT);
+                if(keypress == SDL_SCANCODE_X) {
+					aggro = true;
+					changeMode(MODE_COMBAT);
+				}
             }
         }
     }
@@ -97,14 +99,16 @@ void pollInput(void) {
 
 	//Office keys
 	} else {
-		if(keysHeld[SDL_SCANCODE_D])
-			commands[CMD_PLAYER_DRINK] = true;
-		if(keysHeld[SDL_SCANCODE_B])
-			commands[CMD_PLAYER_BREAK] = true;
-		if(keysHeld[SDL_SCANCODE_UP])
-			commands[CMD_GAME_SPEEDUP] = true;
-		if(keysHeld[SDL_SCANCODE_DOWN])
-			commands[CMD_GAME_SLOWDOWN] = true;
+		if(mode == MODE_OFFICE) {
+			if(keysHeld[SDL_SCANCODE_D])
+				commands[CMD_PLAYER_DRINK] = true;
+			if(keysHeld[SDL_SCANCODE_B])
+				commands[CMD_PLAYER_BREAK] = true;
+			if(keysHeld[SDL_SCANCODE_UP])
+				commands[CMD_GAME_SPEEDUP] = true;
+			if(keysHeld[SDL_SCANCODE_DOWN])
+				commands[CMD_GAME_SLOWDOWN] = true;
+		}
 	}
 }
 
