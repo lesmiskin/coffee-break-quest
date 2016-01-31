@@ -100,6 +100,28 @@ void officeFrame(void) {
 
     Sprite sprite = makeSimpleSprite("office-bg.png");
     drawSprite(sprite, makeCoord(screenBounds.x/2, screenBounds.y/2));
+    Sprite screen;
+    switch ((int)screenNo) {
+        case 0:
+        case 1:
+        case 2:
+        case 3:
+            screen = makeSimpleSprite("screenblank.png");
+            break;
+        case 4:
+        case 5:
+        case 6:
+        case 7:
+        case 8:
+            screen = makeSimpleSprite("screentext.png");
+            break;
+        case 9:
+            screen = makeSimpleSprite("bsod.png");
+
+            break;
+    }
+    drawSprite(screen, makeCoord(screenBounds.x/2 - 6, screenBounds.y/2 - 41));
+
     // clock
     Sprite clock = makeSimpleSprite("clockface.png");
     drawSprite(clock, makeCoord(screenBounds.x/2+100, screenBounds.y/2-85));
@@ -148,14 +170,45 @@ void officeFrame(void) {
             drawSprite(energydrink, makeCoord(228/*ceil(coffeePos)*/, screenBounds.y / 2 + 12));
         }
     }
-    
-    if(toyOn){
-        Sprite deskToy = makeSimpleSprite("clockon.png");
-        drawSprite(deskToy, makeCoord(65/*ceil(coffeePos)*/, screenBounds.y/2 + 5));
-    }else{
-        Sprite deskToy = makeSimpleSprite("clockoff.png");
-        drawSprite(deskToy, makeCoord(65/*ceil(coffeePos)*/, screenBounds.y/2 + 5));
+
+    Sprite item;
+    switch ((int)itemNo) {
+        case 0:
+        case 1:
+        case 2:
+            item = (toyOn) ? makeSimpleSprite("newtonscradle.png") : makeFlippedSprite("newtonscradle.png",SDL_FLIP_HORIZONTAL);
+            break;   
+        case 3:
+            item = makeSimpleSprite("lamp.png");
+            break;
+        case 4:
+            item = makeSimpleSprite("rubikscubesolved.png");
+            break;
+        case 5:
+            item = makeSimpleSprite("rubikscube.png");
+            break;
+        case 6:
+            item = makeSimpleSprite("plant.png");
+            break;
+        case 7:
+            item = makeSimpleSprite("tree.png");
+            break;
+        case 8:
+            item = (toyOn) ? makeSimpleSprite("cat.png") : makeSimpleSprite("cat1.png");
+            break;
+        case 9:
+            item = (toyOn) ? makeSimpleSprite("clockon.png") : makeSimpleSprite("clockoff.png");
+            break;
     }
+    drawSprite(item, makeCoord(65/*ceil(coffeePos)*/, screenBounds.y/2 + 5));
+
+//    if(toyOn){
+//        Sprite item = makeSimpleSprite("clockon.png");
+//        drawSprite(deskToy, makeCoord(65/*ceil(coffeePos)*/, screenBounds.y/2 + 5));
+//    }else{
+//        Sprite deskToy = makeSimpleSprite("clockoff.png");
+//        drawSprite(deskToy, makeCoord(65/*ceil(coffeePos)*/, screenBounds.y/2 + 5));
+//    }
     //Sprite chair1 = makeSimpleSprite("chair-bottom.png");
     //drawSprite(chair1, makeCoord(screenBounds.x/2 - xOffset + 20, screenBounds.y/2 + yOffset));
     //Sprite chair1 = makeSimpleSprite("chair-bottom.png");

@@ -161,6 +161,8 @@ static void initWindow(void) {
     );
     assert(window != NULL);
     randomNo = randomMq(1,100);
+    screenNo = randomMq(0,9);
+    itemNo = randomMq(0,9);
 }
 
 static void shutdownWindow(void) {

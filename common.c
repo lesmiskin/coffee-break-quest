@@ -8,6 +8,8 @@
 
 static const double RADIAN_CIRCLE = 6.28;
 double randomNo;
+double screenNo;
+double itemNo;
 
 GameMode mode = MODE_TITLE;
 
