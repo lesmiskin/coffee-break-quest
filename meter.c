@@ -39,7 +39,7 @@ void slowdown() {
 void meterGameFrame(void) {
 	if(mode == MODE_OFFICE) {
 		//Quit game once time is up.
-		if(timeProgress >= TIME_END) quit();
+		if(timeProgress >= TIME_END) changeMode(MODE_OFFICE_LOST);
 		//Increment meters
 		timeProgress += (TIME_INC * timeRate);
 		bladder += (TIME_INC * timeRate * SLOW_INC);
@@ -48,7 +48,7 @@ void meterGameFrame(void) {
 
 		// Perform actions triggered by meters
 		if (work >= 100){
-			quit();//"YOU WIN!!!"
+			changeMode(MODE_OFFICE_WON);//"YOU WIN!!!"
 		}
 		if (bladder >= 100){
 			//play("sigh.wav");
@@ -57,10 +57,10 @@ void meterGameFrame(void) {
 		}
 		if (hygiene <= 0){
 			aggro = true;
-			changeMode(MODE_COMBAT);
+			changeMode(MODE_COMBAT_FIRSTTIME);
 			hygiene = 40;
 		}
-		if (alertness <= 0) quit(); //"YOU LOSE"
+		if (alertness <= 0) changeMode(MODE_OFFICE_LOST); //"YOU LOSE"
 
 		if (checkCommand(CMD_GAME_SLOWDOWN)) slowdown();
 		if (checkCommand(CMD_GAME_SPEEDUP)) speedup();

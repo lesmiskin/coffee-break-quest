@@ -6,6 +6,8 @@
 #define MAX_COMMANDS 20
 
 static bool commands[MAX_COMMANDS];
+bool firstOffice = true;
+bool firstCombat = true;
 
 bool checkCommand(int commandFlag) {
     return commands[commandFlag];
@@ -35,8 +37,11 @@ void pollInput(void) {
 
 				switch(mode) {
 					case MODE_TITLE:
-						if(keypress == SDL_SCANCODE_SPACE)
+						if(keypress == SDL_SCANCODE_SPACE && firstOffice) {
 							changeMode(MODE_OFFICE_INTRO);
+							firstOffice = false;
+						}
+						else changeMode (MODE_OFFICE);
 //							changeMode(MODE_BREAK_INTRO);
 //							changeMode(MODE_BREAK_OOPS);
 //						changeMode(MODE_COMBAT_FIRSTTIME);
@@ -52,6 +57,10 @@ void pollInput(void) {
 						if(keypress == SDL_SCANCODE_SPACE)
 							changeMode(MODE_OFFICE);
 						break;
+					case MODE_COMBAT_FIRSTTIME:
+						if(keypress == SDL_SCANCODE_SPACE)
+							changeMode(MODE_COMBAT);
+						break;
 				}
 
 				//Exit to title.
@@ -60,9 +69,9 @@ void pollInput(void) {
 					changeMode(MODE_TITLE);
 				}
 
-                //List of key PRESSES go here.
-                if(keypress == SDL_SCANCODE_X)
-                    changeMode(MODE_COMBAT);
+//                //List of key PRESSES go here.
+//                if(keypress == SDL_SCANCODE_X)
+//                    changeMode(MODE_COMBAT);
             }
         }
     }

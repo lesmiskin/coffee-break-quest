@@ -127,7 +127,7 @@ void officeFrame(void) {
             onBreak = false;
             breakOffset = 0;
             aggro = false;
-            changeMode(MODE_COMBAT);
+            changeMode(MODE_BREAK_INTRO);
         }
 
     }
@@ -139,7 +139,7 @@ void officeFrame(void) {
     Sprite chair1 = makeSimpleSprite("chair-bottom-1.png");
     drawSprite(chair1, makeCoord(screenBounds.x/2 - xOffset + drinkOffset, screenBounds.y/2 + yOffset + 31));
     if (drinkInc < maxDrink/2) {
-        if (randomNo > 99) {
+        if (randomNo > 2) {
             Sprite coffee = makeSimpleSprite("coffee.png");
             drawSprite(coffee, makeCoord(228/*ceil(coffeePos)*/, screenBounds.y / 2 + 12));
         }
@@ -148,6 +148,7 @@ void officeFrame(void) {
             drawSprite(energydrink, makeCoord(228/*ceil(coffeePos)*/, screenBounds.y / 2 + 12));
         }
     }
+    
     if(toyOn){
         Sprite deskToy = makeSimpleSprite("clockon.png");
         drawSprite(deskToy, makeCoord(65/*ceil(coffeePos)*/, screenBounds.y/2 + 5));
