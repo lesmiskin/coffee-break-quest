@@ -39,6 +39,12 @@
 
 
 
+//TODO: Aggro, non-aggro upon breaks.							LES
+//TODO: Health bar during combat.								LES
+//TODO: Windows builds etc.
+//TODO: Speed indicator.
+
+//TODO: Cups disappear when hitting player.						EM
 
 //POLISH
 //TODO: Random placement on desk.
@@ -51,6 +57,7 @@
 //TODO: Enemies should bounce off tim (and just throw things).
 
 
+//TODO: More character names.
 
 
 
@@ -75,7 +82,7 @@
 	//Goal: Push all your collegues offscreen to win (SPACE).
 	//Break message (once only): It's time to use the restroom (Use the arrows).
 
-//TODO: Incorporate "Press D to drink" etc. into warning flashes in Office mode.
+
 //TODO: Office chars should change facing direction based on last movement (-'ve of target).
 //TODO: Shading for characters?
 //TODO: Coffee icon for application.

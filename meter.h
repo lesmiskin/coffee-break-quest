@@ -3,7 +3,7 @@
 
 extern double alertness;
 extern double hygiene;
-//extern double alertness;
+extern double timeRate;
 extern double work;
 extern double bladder;
 extern double timeProgress;

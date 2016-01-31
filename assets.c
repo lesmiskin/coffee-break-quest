@@ -121,14 +121,17 @@ static void loadImages(void) {
         { "good-aim.png" },
 
         { "dilbertaggro.png" },
+        { "dilbertalarmed.png" },
         { "dilbertcalm.png" },
         { "dilbertcalmstep.png" },
         { "dwightaggro.png" },
+        { "dwightalarmed.png" },
         { "dwightcalm.png" },
         { "dwightcalmstep.png" },
         { "stevecalm.png" },
         { "stevecalmstep.png" },
         { "steveaggro.png" },
+        { "stevealarmed.png" },
 
         { "clockoff.png" },
         { "clockon.png" },
@@ -140,6 +143,7 @@ static void loadImages(void) {
         { "tree.png" },
         { "timcalm.png" },
         { "timcalmstep.png" },
+        { "timalarmed.png" },
         { "cactus.png" },
         { "leg.png" },
         { "cat.png" },
@@ -239,8 +243,8 @@ static void loadSounds(void) {
 
         //Add to register
         SoundAsset snd = {
-                defs[i].filename,
-                chunk
+            defs[i].filename,
+            chunk
         };
         sounds[i] = snd;
     }
