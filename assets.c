@@ -194,6 +194,8 @@ static void loadImages(void) {
         { "title-coffee-break-quest.png" },
         { "title-coffee-break-quest-1.png" },
         { "title-uhh.png" },
+        { "title-hai.png" },
+        { "title-war.png" },
     };
 
     //Infer asset path from current directory.

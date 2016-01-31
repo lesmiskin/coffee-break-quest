@@ -57,7 +57,7 @@ int cupInc = 0;
 int throwMin = 1500;
 int throwMax = 3500;
 int throwTime = 250;
-bool aggro = false;
+bool aggro = true;
 
 const double CUP_SPEED = 1.3;
 const double ENEMY_SPEED = 0.3;

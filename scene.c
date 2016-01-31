@@ -53,6 +53,8 @@ bool textFlicker = false;
 
 void sceneAnimateFrame() {
 	switch(mode) {
+		case MODE_COMBAT_FIRSTTIME:
+		case MODE_OFFICE_INTRO:
 		case MODE_TITLE:
 			titleAnim = titleAnim == 0 ? 1 : 0;
 			textFlicker = !textFlicker;
@@ -116,35 +118,145 @@ void sceneRenderFrame() {
 			break;
 		}
 
+		case MODE_OFFICE_INTRO: {
+			Sprite bg = makeSimpleSprite("carpet.png");
+			drawSprite(bg, makeCoord(screenBounds.x/2, screenBounds.y/2));
+
+			Sprite sprite = makeSimpleSprite("title-hai.png");
+			drawSprite(sprite, makeCoord(screenBounds.x/2, 32));
+
+			writeFont("you must achieve full productivity before the workday ends!", makeCoord(60, 64));
+
+			writeFont("keep your productivity up by drinking coffee", makeCoord(60, 90));
+			writeFont("press the d key", makeCoord(60, 100));
+
+			writeFont("take regular breaks to maintain your hygene", makeCoord(60, 120));
+			writeFont("press the b key", makeCoord(60, 130));
+
+			writeFont("change the speed of the workday as needed", makeCoord(60, 150));
+			writeFont("press up arrow to speed up", makeCoord(60, 160));
+			writeFont("press down arrow to slow down", makeCoord(60, 170));
+
+			if(textFlicker) {
+				writeFont("press space again to start", makeCoord(113, 220));
+			}
+			break;
+		}
 		case MODE_OFFICE:
 			officeFrame();
 			break;
 
 		case MODE_COMBAT: {
 			Sprite sprite = makeSimpleSprite("carpet.png");
-			drawSprite(sprite, makeCoord(screenBounds.x/2, screenBounds.y/2));
+			drawSprite(sprite, makeCoord(screenBounds.x / 2, screenBounds.y / 2));
 
-			for(int i = 0; i < MAX_PROPS; i++) {
+			for (int i = 0; i < MAX_PROPS; i++) {
 				//Hacky check for unset props.
-				if(props[i].sprite.size.y == 0 || props[i].sprite.texture == NULL) continue;
+				if (props[i].sprite.size.y == 0 || props[i].sprite.texture == NULL) continue;
 
 				drawSprite(props[i].sprite, props[i].coord);
 			}
 			break;
-		case MODE_BREAK_INTRO:
+		}
+		case MODE_BREAK_INTRO: {
+			Sprite bg = makeSimpleSprite("carpet.png");
+			drawSprite(bg, makeCoord(screenBounds.x/2, screenBounds.y/2));
+
+			Sprite sprite = makeSimpleSprite("title-hai.png");
+			drawSprite(sprite, makeCoord(screenBounds.x/2, 32));
+
+			writeFont("your mission if you choose to accept it is", makeCoord(70, 64));
+			writeFont("find the correct bathroom to use!", makeCoord(70, 74));
+
+			//TODO: Show doors here..?
+
 			break;
-		case MODE_BREAK_OOPS:
+		}
+		case MODE_BREAK_OOPS: {
+			Sprite bg = makeSimpleSprite("carpet.png");
+			drawSprite(bg, makeCoord(screenBounds.x/2, screenBounds.y/2));
+
+			Sprite sprite = makeSimpleSprite("title-uhh.png");
+			drawSprite(sprite, makeCoord(screenBounds.x/2, 32));
+
+			writeFont("that is the wrong bathroom", makeCoord(70, 64));
+			writeFont("hey you have a reputation to maintain!", makeCoord(70, 80));
+
+			writeFont("press space to continue", makeCoord(113, 220));
+
 			break;
-		case MODE_COMBAT_FIRSTTIME:
+		} case MODE_COMBAT_FIRSTTIME: {
+			Sprite bg = makeSimpleSprite("carpet.png");
+			drawSprite(bg, makeCoord(screenBounds.x/2, screenBounds.y/2));
+
+			Sprite sprite = makeSimpleSprite("title-war.png");
+			drawSprite(sprite, makeCoord(screenBounds.x/2, 32));
+
+			writeFont("your colleges are angry at your poor sanitation", makeCoord(70, 64));
+			writeFont("and have banded together to destroy you!", makeCoord(70, 74));
+
+			writeFont("defend yourself with the spacebar", makeCoord(70, 94));
+			writeFont("you must push all collegues offscreen to win", makeCoord(70, 104));
+
+			if(textFlicker) {
+				writeFont("press space to start", makeCoord(113, 220));
+			}
 			break;
-		case MODE_COMBAT_LOST:
+
+		} case MODE_COMBAT_LOST: {
+			Sprite bg = makeSimpleSprite("carpet.png");
+			drawSprite(bg, makeCoord(screenBounds.x/2, screenBounds.y/2));
+
+			Sprite sprite = makeSimpleSprite("title-fail.png");
+			drawSprite(sprite, makeCoord(screenBounds.x/2, 32));
+
+			writeFont("your combat skills leave much to be desired", makeCoord(70, 64));
+
+			writeFont("better luck next round!", makeCoord(70, 84));
+
+			writeFont("press space to play again", makeCoord(113, 220));
 			break;
-		} case MODE_COMBAT_WON:
+		}
+		case MODE_COMBAT_WON: {
+			Sprite bg = makeSimpleSprite("carpet.png");
+			drawSprite(bg, makeCoord(screenBounds.x/2, screenBounds.y/2));
+
+			Sprite sprite = makeSimpleSprite("good-aim.png");
+			drawSprite(sprite, makeCoord(screenBounds.x/2, 32));
+
+			writeFont("congratulations!", makeCoord(70, 64));
+			writeFont("your prowess in battle bring your collegues to their knees", makeCoord(70, 84));
+
+			writeFont("press space to play again", makeCoord(113, 220));
 			break;
-		case MODE_OFFICE_WON:
+		}
+		case MODE_OFFICE_WON: {
+			Sprite bg = makeSimpleSprite("carpet.png");
+			drawSprite(bg, makeCoord(screenBounds.x/2, screenBounds.y/2));
+
+			Sprite sprite = makeSimpleSprite("title-winning.png");
+			drawSprite(sprite, makeCoord(screenBounds.x/2, 32));
+
+			writeFont("congratulations!", makeCoord(70, 64));
+			writeFont("you were promoted to management", makeCoord(70, 84));
+			writeFont("enjoy your life of endless hell", makeCoord(70, 104));
+
+			writeFont("press space to play again", makeCoord(113, 220));
 			break;
-		case MODE_OFFICE_LOST:
+		}
+		case MODE_OFFICE_LOST: {
+			Sprite bg = makeSimpleSprite("carpet.png");
+			drawSprite(bg, makeCoord(screenBounds.x/2, screenBounds.y/2));
+
+			Sprite sprite = makeSimpleSprite("title-fail.png");
+			drawSprite(sprite, makeCoord(screenBounds.x/2, 32));
+
+			writeFont("youre fired!", makeCoord(70, 64));
+			writeFont("maybe try your luck as an indie game developer", makeCoord(70, 84));
+
+			writeFont("press space to play again", makeCoord(113, 220));
 			break;
+		}
 	}
 
 	return;

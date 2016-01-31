@@ -24,23 +24,33 @@
 
 //REQUIRED
 //TODO: Screen modes (title, end screen).						LES
-//TODO: Aggro, non-aggro upon breaks.							LES
-//TODO: Fix delay between breaks and drinking (i.e. can't do them all at the same time).	LES
-//TODO: Health bar during combat.								LES
-//TODO: Windows builds etc.
-//TODO: Speed indicator.
+//TODO: Health counter during combat (5 hits and dead).
+//TODO: Trigger the break_intro mode when doing a break.
+//TODO: Trigger the break mode when in break_intro mode.
 
-//TODO: Add gents door (random placement) to combat arena.		EM
-//TODO: Add ladies door (random placement) to combat arena.		EM
-//TODO: Add warning flashes.									EM
-//TODO: Cups disappear when hitting player.						EM
-//TODO: Analog clock.											EM
+//TODO: Randomised names using text.							EM
+//TODO: Female icon on door a bit larger.						EM
+//TODO: Trigger for door entry.									EM
+
+//TODO: Windows builds etc.										LES
+//TODO: Check sounds before release.
+//TODO: Resolution calculator.
+//TODO: Don't let the player use SPACE when non-aggro.
+
+
+
 
 //POLISH
 //TODO: Random placement on desk.
 //TODO: Desk ornament animation.
-//TODO: More character names.
-//TODO: 9-5 clock?
+//TODO: Door spawning in tighter region inside screen.
+//TODO: Bug: Aggro crashes sometimes.
+//TODO: Don't spawn enemies immediately next to Tim on combat screen.
+//TODO: Don't spawn doors immediately next to Tim on combat screen.
+//TODO: Enemies should bounce off each other.
+//TODO: Enemies should bounce off tim (and just throw things).
+
+
 
 
 
@@ -86,12 +96,11 @@
 //TODO: Coffee cups cause "hit" graphic on player.
 //TODO: Klaxon sound for warning icons.
 
+
+
 //POLISH
 //TODO: Smoothing out animations.
 //TODO: Retail distribution on Linux, Mac, and Windows.
-//TODO: Don't spawn enemies immediately next to Tim on combat screen.
-//TODO: Enemies should bounce off each other.
-//TODO: Enemies should bounce off tim (and just throw things).
 
 //IF TIME
 //TODO: Something should happen when enemy bumps up against the player?

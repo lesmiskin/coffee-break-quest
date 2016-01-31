@@ -33,12 +33,25 @@ void pollInput(void) {
                 SDL_Keycode keypress = event.key.keysym.scancode;
 
 
-				//Skip from title to game.
-				if(mode == MODE_TITLE) {
-					if(keypress == SDL_SCANCODE_SPACE)
-						changeMode(MODE_OFFICE);
-					if(keypress == SDL_SCANCODE_ESCAPE)
-						commands[CMD_QUIT] = true;
+				switch(mode) {
+					case MODE_TITLE:
+						if(keypress == SDL_SCANCODE_SPACE)
+							changeMode(MODE_OFFICE_INTRO);
+//							changeMode(MODE_BREAK_INTRO);
+//							changeMode(MODE_BREAK_OOPS);
+//						changeMode(MODE_COMBAT_FIRSTTIME);
+//						changeMode(MODE_COMBAT_LOST);
+//						changeMode(MODE_COMBAT_WON);
+//						changeMode(MODE_OFFICE_WON);
+//						changeMode(MODE_OFFICE_LOST);
+
+						if(keypress == SDL_SCANCODE_ESCAPE)
+							commands[CMD_QUIT] = true;
+						break;
+					case MODE_OFFICE_INTRO:
+						if(keypress == SDL_SCANCODE_SPACE)
+							changeMode(MODE_OFFICE);
+						break;
 				}
 
 				//Exit to title.
