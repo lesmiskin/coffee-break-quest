@@ -3,16 +3,13 @@
 #include "renderer.h"
 #include "assets.h"
 #include "time.h"
+#include "hud.h"
 
 //TODO: Cups vanish upon hit.
 //TODO: Cups impact player health.
 //TODO: Projectiles reverse direction of cups?
 
-typedef struct {
-	Coord coord;
-	Coord target;
-	double angle;
-} Cup;
+
 
 typedef enum {
 	STATE_CALMSTEP,
@@ -26,6 +23,24 @@ typedef enum {
 	NAME_STEVE,
 	NAME_BILL,
 	NAME_OWEN,
+	NAME_JAMES,
+	NAME_JOHN,
+	NAME_ROB,
+	NAME_MIKE,
+	NAME_WILL,
+	NAME_DAVID,
+	NAME_RICHARD,
+	NAME_CHARLES,
+	NAME_JOE,
+	NAME_CHRIS,
+	NAME_DANIEL,
+	NAME_PAUL,
+	NAME_MARK,
+	NAME_DONALD,
+	NAME_GEORGE,
+	NAME_KEN,
+	NAME_EDWARD,
+	NAME_BRIAN,
 } EnemyName;
 
 typedef enum {
@@ -49,7 +64,6 @@ typedef struct {
 } Enemy;
 
 #define MAX_ENEMY 12
-#define MAX_CUPS 50
 #define WALK_ANIMS 4	//We play each frame twice.
 Enemy enemies[MAX_ENEMY];
 Cup cups[MAX_CUPS];
@@ -57,7 +71,8 @@ int cupInc = 0;
 int throwMin = 1500;
 int throwMax = 3500;
 int throwTime = 250;
-bool aggro = false;
+int xOffset = -7;
+bool aggro = true;
 
 const double CUP_SPEED = 1.3;
 const double ENEMY_SPEED = 0.3;
@@ -111,10 +126,10 @@ void enemyGameFrame(void) {
 				Coord step = getStep(pos, enemies[i].coord, 1, true);
 				enemies[i].coord.x -= step.x;
 				enemies[i].coord.y -= step.y;
+				enemies[i].state = STATE_ALARMED;
+				//aggro = true; // Messes with door collision in non-combat mode
 			}
 		}
-
-		//TODO: Enemy wiggling.
 
 		if(!aggro) {
 			Coord homeStep;
@@ -163,6 +178,9 @@ void enemyGameFrame(void) {
 				enemies[i].state = STATE_CALMSTEP;
 			}
 		}
+		if (enemies[i].state == STATE_ALARMED && enemies[i].animInc == 3) {
+			enemies[i].state = STATE_CALMSTEP;
+		}
 	}
 
 	//Move the cups towards the player.
@@ -200,22 +218,79 @@ void enemyNameRenderFrame(void) {
 		switch(enemies[i].name) {
 			case NAME_BILL:
 				nameSprite = makeSimpleSprite("name-bill.png");
+				drawSprite(nameSprite, deriveCoord(enemies[i].coord, 0, -31));
 				break;
 			case NAME_DILBERT:
 				nameSprite = makeSimpleSprite("name-dilbert.png");
+				drawSprite(nameSprite, deriveCoord(enemies[i].coord, 0, -31));
 				break;
 			case NAME_OWEN:
 				nameSprite = makeSimpleSprite("name-owen.png");
+				drawSprite(nameSprite, deriveCoord(enemies[i].coord, 0, -31));
 				break;
 			case NAME_STEVE:
 				nameSprite = makeSimpleSprite("name-steve.png");
+				drawSprite(nameSprite, deriveCoord(enemies[i].coord, 0, -31));
 				break;
 			case NAME_DWIGHT:
 				nameSprite = makeSimpleSprite("name-dwight.png");
+				drawSprite(nameSprite, deriveCoord(enemies[i].coord, 0, -31));
+				break;
+			case NAME_JAMES:
+				writeFont("james", deriveCoord(enemies[i].coord, xOffset, -31));
+				break;
+			case NAME_BRIAN:
+				writeFont("brian", deriveCoord(enemies[i].coord, xOffset, -31));
+				break;
+			case NAME_EDWARD:
+				writeFont("edward", deriveCoord(enemies[i].coord, xOffset, -31));
+				break;
+			case NAME_KEN:
+				writeFont("ken", deriveCoord(enemies[i].coord, xOffset, -31));
+				break;
+			case NAME_GEORGE:
+				writeFont("george", deriveCoord(enemies[i].coord, xOffset, -31));
+				break;
+			case NAME_DONALD:
+				writeFont("donald", deriveCoord(enemies[i].coord, xOffset, -31));
+				break;
+			case NAME_MARK:
+				writeFont("mark", deriveCoord(enemies[i].coord, xOffset, -31));
+				break;
+			case NAME_JOHN:
+				writeFont("john", deriveCoord(enemies[i].coord, xOffset, -31));
+				break;
+			case NAME_ROB:
+				writeFont("rob", deriveCoord(enemies[i].coord, xOffset, -31));
+				break;
+			case NAME_MIKE:
+				writeFont("mike", deriveCoord(enemies[i].coord, xOffset, -31));
+				break;
+			case NAME_WILL:
+				writeFont("will", deriveCoord(enemies[i].coord, xOffset, -31));
+				break;
+			case NAME_DAVID:
+				writeFont("david", deriveCoord(enemies[i].coord, xOffset, -31));
+				break;
+			case NAME_RICHARD:
+				writeFont("richard", deriveCoord(enemies[i].coord, xOffset, -31));
+				break;
+			case NAME_CHARLES:
+				writeFont("charles", deriveCoord(enemies[i].coord, xOffset, -31));
+				break;
+			case NAME_JOE:
+				writeFont("joe", deriveCoord(enemies[i].coord, xOffset, -31));
+				break;
+			case NAME_CHRIS:
+				writeFont("chris", deriveCoord(enemies[i].coord, xOffset, -31));
+				break;
+			case NAME_DANIEL:
+				writeFont("daniel", deriveCoord(enemies[i].coord, xOffset, -31));
+				break;
+			case NAME_PAUL:
+				writeFont("paul", deriveCoord(enemies[i].coord, xOffset, -31));
 				break;
 		}
-
-		drawSprite(nameSprite, deriveCoord(enemies[i].coord, 0, -31));
 	}
 }
 
@@ -245,6 +320,9 @@ void enemyRenderFrame(void){
 				if(enemies[i].state == STATE_THROW)
 					sprite = makeFlippedSprite("dilbertaggro.png", shouldFace(enemies[i].coord));
 				else
+				if(enemies[i].state == STATE_ALARMED)
+					sprite = makeFlippedSprite("dilbertalarmed.png", shouldFace(enemies[i].coord));
+				else
 				if(enemies[i].animInc >= 2)
 					sprite = makeFlippedSprite("dilbertcalmstep.png", shouldFace(enemies[i].coord));
 				else
@@ -254,6 +332,9 @@ void enemyRenderFrame(void){
 				if(enemies[i].state == STATE_THROW)
 					sprite = makeFlippedSprite("dwightaggro.png", shouldFace(enemies[i].coord));
 				else
+				if(enemies[i].state == STATE_ALARMED)
+					sprite = makeFlippedSprite("dwightalarmed.png", shouldFace(enemies[i].coord));
+				else
 				if(enemies[i].animInc >= 2)
 					sprite = makeFlippedSprite("dwightcalmstep.png", shouldFace(enemies[i].coord));
 				else
@@ -262,6 +343,9 @@ void enemyRenderFrame(void){
 			case TYPE_STEVE:
 				if(enemies[i].state == STATE_THROW)
 					sprite = makeFlippedSprite("steveaggro.png", shouldFace(enemies[i].coord));
+				else
+				if(enemies[i].state == STATE_ALARMED)
+					sprite = makeFlippedSprite("stevealarmed.png", shouldFace(enemies[i].coord));
 				else
 				if(enemies[i].animInc >= 2)
 					sprite = makeFlippedSprite("stevecalmstep.png", shouldFace(enemies[i].coord));
@@ -298,7 +382,7 @@ void initEnemy(void) {
 			chance(50) ? throwMin : throwMax,
 			randomMq(0, WALK_ANIMS-1),
 			(EnemyType)randomMq(0, 2),
-			(EnemyName)randomMq(0, 4),
+			(EnemyName)randomMq(0, 22),
 			randomDir(c),
 			clock(),
 			1000

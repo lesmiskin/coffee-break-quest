@@ -25,22 +25,16 @@
 //REQUIRED
 //TODO: Screen modes (title, end screen).						LES
 //TODO: Aggro, non-aggro upon breaks.							LES
-//TODO: Fix delay between breaks and drinking (i.e. can't do them all at the same time).	LES
 //TODO: Health bar during combat.								LES
 //TODO: Windows builds etc.
 //TODO: Speed indicator.
 
-//TODO: Add gents door (random placement) to combat arena.		EM
-//TODO: Add ladies door (random placement) to combat arena.		EM
-//TODO: Add warning flashes.									EM
 //TODO: Cups disappear when hitting player.						EM
-//TODO: Analog clock.											EM
 
 //POLISH
 //TODO: Random placement on desk.
 //TODO: Desk ornament animation.
 //TODO: More character names.
-//TODO: 9-5 clock?
 
 
 
@@ -65,7 +59,7 @@
 	//Goal: Push all your collegues offscreen to win (SPACE).
 	//Break message (once only): It's time to use the restroom (Use the arrows).
 
-//TODO: Incorporate "Press D to drink" etc. into warning flashes in Office mode.
+
 //TODO: Office chars should change facing direction based on last movement (-'ve of target).
 //TODO: Shading for characters?
 //TODO: Coffee icon for application.

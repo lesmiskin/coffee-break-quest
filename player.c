@@ -6,6 +6,7 @@
 #include "renderer.h"
 #include "meter.h"
 #include "scene.h"
+#include "enemy.h"
 
 const int SHOT_DELAY = 15;
 double MOVE_INC = 1.4;
@@ -20,23 +21,26 @@ long lastShot;
 int walkInc = 0;
 bool playerDir = false;
 double health = 100;
+bool cupCollision = false;
 
 double hyg_inc = 10;
 double hyg_max = 100;
 
 void drink(void) {
+	if(onDrink || onBreak) return;
 	play("drink.wav");
 	spawnPlume(PLUME_DRINK);
-	bladder++;
-	alertness++;
+	bladder+= 10;
+	alertness = (alertness <= 90) ? alertness += 10 : 100;
 	onDrink = true;
 }
 
 void takeBreak(void) {
+	if(onDrink || onBreak) return;
 	play("break.wav");
 	spawnPlume(PLUME_BREAK);
 	bladder=0;
-	work = (work < 1) ? 0 : work--;
+	work = (work < 10) ? 0 : work--;
 	if (hygiene >= hyg_max - hyg_inc) {
 		hygiene = hyg_max;
 	}
@@ -106,7 +110,27 @@ void playerRenderFrame(void) {
 	Sprite player;
 	SDL_RendererFlip flip = playerDir ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE;
 
-	if(isWalking()) {
+	//cup collision detection.
+	for(int j=0; j < MAX_CUPS; j++) {
+		if(inBounds(cups[j].coord, makeSquareBounds(pos, 20))) {
+			cupCollision = true;
+			cups[j].coord.x = 0;
+		}
+	}
+
+	//door collision detection.
+	if(!aggro){
+		if(inBounds(props[6].coord, makeSquareBounds(pos, 20))) {
+			changeMode(MODE_OFFICE);
+		}else if(inBounds(props[7].coord, makeSquareBounds(pos, 20))){
+			changeMode(MODE_BREAK_OOPS);
+		}
+	}
+
+	if(cupCollision){
+		player = makeFlippedSprite("timalarmed.png", flip);
+		cupCollision = false;
+	} else if(isWalking()) {
 		if(walkInc == 1) {
 			player = makeFlippedSprite("timcalmstep.png", flip);
 		}else{

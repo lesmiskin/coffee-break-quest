@@ -1,6 +1,7 @@
 #include "common.h"
 #include "assets.h"
 #include "input.h"
+#include "enemy.h"
 
 //Tying animation.
 //Player needs typing animation (head bobbing)
@@ -55,6 +56,7 @@ void meterGameFrame(void) {
 			bladder = 0;
 		}
 		if (hygiene <= 0){
+			aggro = true;
 			changeMode(MODE_COMBAT);
 			hygiene = 40;
 		}
