@@ -259,7 +259,12 @@ void sceneRenderFrame() {
 			writeFont("your mission if you choose to accept it is", makeCoord(70, 64));
 			writeFont("find the correct bathroom to use!", makeCoord(70, 74));
 
-			//TODO: Show doors here..?
+			Sprite door1 = makeSimpleSprite("doormale.png");
+			drawSprite(door1, makeCoord(130, 140));
+			Sprite door2 = makeSimpleSprite("doorfemale.png");
+			drawSprite(door2, makeCoord(180, 140));
+
+			writeFont("press space to begin", makeCoord(113, 220));
 
 			break;
 		}

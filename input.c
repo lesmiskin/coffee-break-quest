@@ -2,6 +2,7 @@
 #include "meter.h"
 #include "common.h"
 #include "input.h"
+#include "enemy.h"
 
 #define MAX_COMMANDS 20
 
@@ -57,6 +58,7 @@ void pollInput(void) {
 						if(keypress == SDL_SCANCODE_SPACE)
 							changeMode(MODE_OFFICE);
 						break;
+					case MODE_BREAK_INTRO:
 					case MODE_COMBAT_FIRSTTIME:
 						if(keypress == SDL_SCANCODE_SPACE)
 							changeMode(MODE_COMBAT);
@@ -88,8 +90,10 @@ void pollInput(void) {
 		else if(keysHeld[SDL_SCANCODE_DOWN])
 			commands[CMD_PLAYER_DOWN] = true;
 
-		if (keysHeld[SDL_SCANCODE_SPACE])
-			commands[CMD_PLAYER_FIRE] = true;
+		if(aggro) {
+			if (keysHeld[SDL_SCANCODE_SPACE])
+				commands[CMD_PLAYER_FIRE] = true;
+		}
 
 	//Office keys
 	} else {
