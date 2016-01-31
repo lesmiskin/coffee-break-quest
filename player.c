@@ -12,7 +12,7 @@ const int SHOT_DELAY = 15;
 double MOVE_INC = 1.4;
 double SHOT_SPEED = 2;
 
-Coord pos = { 50, 50 };
+Coord pos = { 25, 50 };
 double targetInc = 0;
 bool shotDir = false;
 Shot shots[255];
@@ -186,4 +186,6 @@ void playerGameFrame(void) {
 void initPlayer() {
 	lastShot = clock();
 	memset(shots, 0, sizeof(shots));
+	pos.x = 25;
+	pos.y = 50;
 }

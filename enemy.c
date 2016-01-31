@@ -370,8 +370,8 @@ void initEnemy(void) {
 	//Make the enemies
 	for(int i=0; i < 6; i++) {
 		Coord c = makeCoord(
-				randomMq(1, 320),
-				randomMq(1, 240)
+				randomMq(75, 320),
+				randomMq(75, 240)
 		);
 
 		Enemy enemy = {
