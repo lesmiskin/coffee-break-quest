@@ -6,7 +6,7 @@
 #include "meter.h"
 #include "enemy.h"
 
-
+int typeInc = 0;
 double bobHeadInc = 1;
 double bobBodyInc = 1;
 double breakOffset = 0;
@@ -87,6 +87,14 @@ void sceneAnimateFrame() {
 }
 
 void officeFrame(void) {
+//	if(typeInc == typeNo || typeInc == 40){
+//		play("type.wav");
+//		typeNo = randomMq(0,30);
+//		typeInc = 0;
+//	} else {
+//		typeInc++;
+//	}
+
     newProg = (int)timeProgress;
     if(newProg != oldProg) {
         if (newProg % 5 == 0) {
@@ -274,7 +282,7 @@ void sceneRenderFrame() {
 			writeFont("keep your productivity up by drinking coffee", makeCoord(60, 90));
 			writeFont("press the d key", makeCoord(60, 100));
 
-			writeFont("take regular breaks to maintain your hygene", makeCoord(60, 120));
+			writeFont("take regular breaks to maintain your hygiene", makeCoord(60, 120));
 			writeFont("press the b key", makeCoord(60, 130));
 
 			writeFont("change the speed of the workday as needed", makeCoord(60, 150));
@@ -341,11 +349,11 @@ void sceneRenderFrame() {
 			Sprite sprite = makeSimpleSprite("title-war.png");
 			drawSprite(sprite, makeCoord(screenBounds.x/2, 32));
 
-			writeFont("your colleges are angry at your poor sanitation", makeCoord(70, 64));
+			writeFont("your colleagues are angry at your poor sanitation", makeCoord(70, 64));
 			writeFont("and have banded together to destroy you!", makeCoord(70, 74));
 
 			writeFont("defend yourself with the spacebar", makeCoord(70, 94));
-			writeFont("you must push all collegues offscreen to win", makeCoord(70, 104));
+			writeFont("you must push all colleagues offscreen to win", makeCoord(70, 104));
 
 			if(textFlicker) {
 				writeFont("press space to start", makeCoord(113, 220));
@@ -374,7 +382,7 @@ void sceneRenderFrame() {
 			drawSprite(sprite, makeCoord(screenBounds.x/2, 32));
 
 			writeFont("congratulations!", makeCoord(70, 64));
-			writeFont("your prowess in battle bring your collegues to their knees", makeCoord(70, 84));
+			writeFont("your prowess in battle bring your colleagues to their knees", makeCoord(70, 84));
 
 			writeFont("press space to play again", makeCoord(113, 220));
 			break;

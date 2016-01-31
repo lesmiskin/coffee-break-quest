@@ -227,6 +227,11 @@ static void loadSounds(void) {
         { "up.wav", SOUND_VOLUME },
 		{ "shoot3.wav", SOUND_VOLUME },
 		{ "fire-coffee.wav", SOUND_VOLUME },
+        { "hit.wav", SOUND_VOLUME },
+        { "type.wav", SOUND_VOLUME },
+        { "sigh.wav", SOUND_VOLUME },
+        { "fail.wav", SOUND_VOLUME * 2 },
+        { "win.wav", SOUND_VOLUME * 2 },
     };
 
     soundCount = sizeof(defs) / sizeof(SoundDef);

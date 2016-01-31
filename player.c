@@ -116,12 +116,14 @@ void playerRenderFrame(void) {
 			cupCollision = true;
 			cups[j].coord.x = 0;
 			health -= 10;
+			play("hit.wav");
 		}
 	}
 
 	//door collision detection.
 	if(!aggro){
 		if(inBounds(props[6].coord, makeSquareBounds(pos, 20))) {
+			play("win.wav");
 			changeMode(MODE_OFFICE);
 		}else if(inBounds(props[7].coord, makeSquareBounds(pos, 20))){
 			changeMode(MODE_BREAK_OOPS);

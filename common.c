@@ -5,21 +5,39 @@
 #include "enemy.h"
 #include "scene.h"
 #include "player.h"
+#include "meter.h"
+#include "assets.h"
 
 static const double RADIAN_CIRCLE = 6.28;
 double randomNo;
 double screenNo;
 double itemNo;
+double typeNo;
 
 GameMode mode = MODE_TITLE;
 
 void changeMode(GameMode newMode) {
     mode = newMode;
 
+    switch(mode) {
+        case MODE_OFFICE_WON:
+        case MODE_COMBAT_WON:
+        case MODE_TITLE:
+            play("win.wav");
+            break;
+        case MODE_BREAK_OOPS:
+        case MODE_OFFICE_LOST:
+        case MODE_COMBAT_LOST:
+            play("fail.wav");
+            break;
+    }
+
+
     if(mode == MODE_OFFICE || mode == MODE_COMBAT) {
         initPlayer();
         initEnemy();
         initScene();
+        meterInit();
 //    }else{
 //        mode = MODE_OFFICE;
     }

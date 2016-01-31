@@ -71,11 +71,11 @@ void pollInput(void) {
 					changeMode(MODE_TITLE);
 				}
 
-//                //List of key PRESSES go here.
-                if(keypress == SDL_SCANCODE_X) {
-					aggro = true;
-					changeMode(MODE_COMBAT);
-				}
+				//Cheat for aggro test.
+//                     if(keypress == SDL_SCANCODE_X) {
+//					aggro = true;
+//					changeMode(MODE_COMBAT);
+//				}
             }
         }
     }

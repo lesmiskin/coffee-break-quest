@@ -24,6 +24,15 @@ const double SPEED_INC = 0.1;
 const double TIME_END = 480;
 const double SLOW_INC = 0.5;
 
+void meterInit() {
+	alertness = 50;
+	hygiene = 100;
+	work = 0;
+	bladder = 0;
+	timeProgress;
+	timeRate = 1;
+}
+
 void speedup() {
 	if(timeRate + SPEED_INC > MAX_SPEED) return;
 	timeRate += SPEED_INC;

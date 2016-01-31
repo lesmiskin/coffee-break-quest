@@ -9,6 +9,8 @@
 static Sprite letters[10];
 static const int LETTER_WIDTH = 4;
 
+bool hudFlash = false;
+
 typedef struct {
 	PlumeType type;
 	Coord origin;
@@ -16,6 +18,10 @@ typedef struct {
 } Plume;
 
 Plume plume;
+
+void hudAnimFrame() {
+	hudFlash = !hudFlash;
+}
 
 void spawnPlume(PlumeType type) {
 	Plume thisPlume = {
@@ -113,36 +119,34 @@ void hudRenderFrame(void) {
 
 	if(mode == MODE_OFFICE) {
 		//Stat text.
-		writeText(alertness, makeCoord(30, 10));
-		writeText(hygiene, makeCoord(30, 20));
-		writeText(bladder, makeCoord(30, 30));
-		writeText(work, makeCoord(30, 40));
-		writeText(timeProgress, makeCoord(30, 55));
+		writeText(alertness, makeCoord(75, 10));
+		writeText(hygiene, makeCoord(75, 20));
+		writeText(bladder, makeCoord(75, 30));
+		writeText(work, makeCoord(75, 40));
 
 		//Captions
-		drawSprite(makeSimpleSprite("caff.png"), makeCoord(12, 10));
-		drawSprite(makeSimpleSprite("hyg.png"), makeCoord(12, 20));
-		drawSprite(makeSimpleSprite("blad.png"), makeCoord(12, 30));
-		drawSprite(makeSimpleSprite("prod.png"), makeCoord(12, 40));
-		drawSprite(makeSimpleSprite("grind.png"), makeCoord(11, 55));
+		writeFont("caffiene", makeCoord(12, 10));
+		writeFont("hygiene", makeCoord(12, 20));
+		writeFont("bladder", makeCoord(12, 30));
+		writeFont("productivity", makeCoord(12, 40));
 
-		if(alertness <= 10){
-			drawSprite(makeSimpleSprite("warning.png"), makeCoord(45, 10));
-			writeFont("press d to drink", makeCoord(55,10));
+		if(alertness <= 10 && hudFlash){
+			drawSprite(makeSimpleSprite("warning.png"), makeCoord(95, 10));
+			writeFont("press d to drink", makeCoord(105,10));
 			// warning + "press D to drink"
 		}
-		if(bladder >= 90){
-			drawSprite(makeSimpleSprite("warning.png"), makeCoord(45, 30));
-			writeFont("press b to break", makeCoord(55,30));
+		if(bladder >= 90 && hudFlash){
+			drawSprite(makeSimpleSprite("warning.png"), makeCoord(95, 30));
+			writeFont("press b to break", makeCoord(105,30));
 			// warning + "press B to break"
 		}
-		if(hygiene <= 40){
-			drawSprite(makeSimpleSprite("warning.png"), makeCoord(45, 20));
+		if(hygiene <= 40 && hudFlash){
+			drawSprite(makeSimpleSprite("warning.png"), makeCoord(95, 20));
 			// warning
 		}
-		if(timeProgress >= 420){
-			drawSprite(makeSimpleSprite("warning.png"), makeCoord(45, 55));
-			writeFont("work day almost over", makeCoord(55,55));
+		if(timeProgress >= 420 && hudFlash){
+			drawSprite(makeSimpleSprite("warning.png"), makeCoord(10, 55));
+			writeFont("work day almost over", makeCoord(20,55));
 			// warning + "day almost over"
 		}
 

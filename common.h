@@ -28,6 +28,7 @@ typedef struct {
 	int width, height;
 } Rect;
 
+extern double typeNo;
 extern Rect makeRect(double x, double y, double width, double height);
 extern bool inBounds(Coord point, Rect area);
 extern Rect makeBounds(Coord origin, double width, double height);
