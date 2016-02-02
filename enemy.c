@@ -5,12 +5,6 @@
 #include "time.h"
 #include "hud.h"
 
-//TODO: Cups vanish upon hit.
-//TODO: Cups impact player health.
-//TODO: Projectiles reverse direction of cups?
-
-
-
 typedef enum {
 	STATE_CALMSTEP,
 	STATE_THROW,
@@ -61,7 +55,6 @@ typedef struct {
 	Coord idleTarget;
 	long lastDirTime;
 	int nextDirTime;
-	bool walkingDir;
 } Enemy;
 
 #define MAX_ENEMY 12
@@ -74,7 +67,6 @@ int throwMax = 3500;
 int throwTime = 250;
 int xOffset = -7;
 bool aggro = false;
-bool walkingDir = false;
 
 const double CUP_SPEED = 1.3;
 const double ENEMY_SPEED = 0.3;
@@ -389,8 +381,7 @@ void initEnemy(void) {
 			(EnemyName)randomMq(0, 22),
 			randomDir(c),
 			clock(),
-			1000,
-			false
+			1000
 		};
 
 		enemies[i] = enemy;
