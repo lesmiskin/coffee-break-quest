@@ -34,10 +34,10 @@ void changeMode(GameMode newMode) {
 
 
     if(mode == MODE_OFFICE || mode == MODE_COMBAT) {
+        meterInit();
         initPlayer();
         initEnemy();
         initScene();
-        meterInit();
 //    }else{
 //        mode = MODE_OFFICE;
     }

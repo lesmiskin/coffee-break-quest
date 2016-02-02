@@ -20,8 +20,8 @@ bool onBreak = false;
 bool onDrink = false;
 int drinkInc = 0;
 int maxDrink = 50;
-int minuteDeg = 0;
-int hourDeg = 270;
+double minuteDeg = 0;
+double hourDeg = 270;
 int newProg;
 int oldProg = 0;
 
@@ -97,11 +97,19 @@ void officeFrame(void) {
 
     newProg = (int)timeProgress;
     if(newProg != oldProg) {
-        if (newProg % 5 == 0) {
-            minuteDeg += 30;
-            if (newProg % 60 == 0) {
-                hourDeg += 30;
-            }
+
+		//Chunky movement (still cool - make an option?)
+//		if (newProg % 5 == 0) {
+//			minuteDeg += 30;
+//			if (newProg % 60 == 0) {
+//				hourDeg += 30;
+//			}
+//		}
+
+        //Smooth movement.
+		if (newProg % 1 == 0) {
+            minuteDeg += 6;
+			hourDeg += 0.5;
         }
     }
     oldProg = newProg;
@@ -421,6 +429,8 @@ void sceneRenderFrame() {
 
 
 void initScene() {
+	minuteDeg = 0;
+	hourDeg = 270;
 	propInc = 0;
 
 	if(mode == MODE_COMBAT) {

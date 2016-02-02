@@ -29,7 +29,7 @@ void meterInit() {
 	hygiene = 100;
 	work = 0;
 	bladder = 0;
-	timeProgress;
+	timeProgress = 0;
 	timeRate = 1;
 }
 
