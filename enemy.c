@@ -59,8 +59,9 @@ typedef struct {
 	EnemyType type;
 	EnemyName name;
 	Coord idleTarget;
-	long lastDir;
-	int nextDir;
+	long lastDirTime;
+	int nextDirTime;
+	bool walkingDir;
 } Enemy;
 
 #define MAX_ENEMY 12
@@ -72,7 +73,8 @@ int throwMin = 1500;
 int throwMax = 3500;
 int throwTime = 250;
 int xOffset = -7;
-bool aggro = true;
+bool aggro = false;
+bool walkingDir = false;
 
 const double CUP_SPEED = 1.3;
 const double ENEMY_SPEED = 0.3;
@@ -101,6 +103,7 @@ bool hasWon(void) {
 }
 
 Coord randomDir(Coord coord) {
+	//Randomly set the target for the enemy, so they walk towards it.
 	return deriveCoord(coord, randomMq(-20, 20), randomMq(-20, 20));
 }
 
@@ -110,11 +113,6 @@ void enemyGameFrame(void) {
 	//Everyone put offscreen? Then win.
 	if(hasWon()) {
 		changeMode(MODE_COMBAT_WON);
-	}
-
-	//Did the player go offscreen? Switch back to our desk, then.
-	if(!onScreen(pos, 0)) {
-//		changeMode();
 	}
 
 	for(int i=0; i < MAX_ENEMY; i++) {
@@ -135,7 +133,7 @@ void enemyGameFrame(void) {
 			Coord homeStep;
 
 			//Change idle target if it's time to, or if he's near the edge of the screen.
-			if (timer(&enemies[i].lastDir, enemies[i].nextDir)) {
+			if (timer(&enemies[i].lastDirTime, enemies[i].nextDirTime)) {
 				enemies[i].idleTarget = randomDir(enemies[i].coord);
 			//Retarget enemies to the middle of the screen if they're going offscreen of their own volition.
 			}else if(!onScreen(enemies[i].coord, 10)) {
@@ -205,8 +203,14 @@ void enemyAnimateFrame(void) {
 	}
 }
 
-SDL_RendererFlip shouldFace(Coord npc) {
-	return pos.x < npc.x ? SDL_FLIP_NONE : SDL_FLIP_HORIZONTAL;
+SDL_RendererFlip shouldFace(Enemy *enemy) {
+	//Face player when aggro
+	if(aggro) {
+		return pos.x > enemy->coord.x ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE;
+	//Otherwise face in direction he's walking in.
+	}else{
+		return enemy->idleTarget.x < enemy->coord.x ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE;
+	}
 }
 
 void enemyNameRenderFrame(void) {
@@ -318,39 +322,39 @@ void enemyRenderFrame(void){
 		switch(enemies[i].type) {
 			case TYPE_DILBERT:
 				if(enemies[i].state == STATE_THROW)
-					sprite = makeFlippedSprite("dilbertaggro.png", shouldFace(enemies[i].coord));
+					sprite = makeFlippedSprite("dilbertaggro.png", shouldFace(&enemies[i]));
 				else
 				if(enemies[i].state == STATE_ALARMED)
-					sprite = makeFlippedSprite("dilbertalarmed.png", shouldFace(enemies[i].coord));
+					sprite = makeFlippedSprite("dilbertalarmed.png", shouldFace(&enemies[i]));
 				else
 				if(enemies[i].animInc >= 2)
-					sprite = makeFlippedSprite("dilbertcalmstep.png", shouldFace(enemies[i].coord));
+					sprite = makeFlippedSprite("dilbertcalmstep.png", shouldFace(&enemies[i]));
 				else
-					sprite = makeFlippedSprite("dilbertcalm.png", shouldFace(enemies[i].coord));
+					sprite = makeFlippedSprite("dilbertcalm.png", shouldFace(&enemies[i]));
 				break;
 			case TYPE_DWIGHT:
 				if(enemies[i].state == STATE_THROW)
-					sprite = makeFlippedSprite("dwightaggro.png", shouldFace(enemies[i].coord));
+					sprite = makeFlippedSprite("dwightaggro.png", shouldFace(&enemies[i]));
 				else
 				if(enemies[i].state == STATE_ALARMED)
-					sprite = makeFlippedSprite("dwightalarmed.png", shouldFace(enemies[i].coord));
+					sprite = makeFlippedSprite("dwightalarmed.png", shouldFace(&enemies[i]));
 				else
 				if(enemies[i].animInc >= 2)
-					sprite = makeFlippedSprite("dwightcalmstep.png", shouldFace(enemies[i].coord));
+					sprite = makeFlippedSprite("dwightcalmstep.png", shouldFace(&enemies[i]));
 				else
-					sprite = makeFlippedSprite("dwightcalm.png", shouldFace(enemies[i].coord));
+					sprite = makeFlippedSprite("dwightcalm.png", shouldFace(&enemies[i]));
 				break;
 			case TYPE_STEVE:
 				if(enemies[i].state == STATE_THROW)
-					sprite = makeFlippedSprite("steveaggro.png", shouldFace(enemies[i].coord));
+					sprite = makeFlippedSprite("steveaggro.png", shouldFace(&enemies[i]));
 				else
 				if(enemies[i].state == STATE_ALARMED)
-					sprite = makeFlippedSprite("stevealarmed.png", shouldFace(enemies[i].coord));
+					sprite = makeFlippedSprite("stevealarmed.png", shouldFace(&enemies[i]));
 				else
 				if(enemies[i].animInc >= 2)
-					sprite = makeFlippedSprite("stevecalmstep.png", shouldFace(enemies[i].coord));
+					sprite = makeFlippedSprite("stevecalmstep.png", shouldFace(&enemies[i]));
 				else
-					sprite = makeFlippedSprite("stevecalm.png", shouldFace(enemies[i].coord));
+					sprite = makeFlippedSprite("stevecalm.png", shouldFace(&enemies[i]));
 				break;
 		}
 
@@ -385,7 +389,8 @@ void initEnemy(void) {
 			(EnemyName)randomMq(0, 22),
 			randomDir(c),
 			clock(),
-			1000
+			1000,
+			false
 		};
 
 		enemies[i] = enemy;
