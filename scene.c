@@ -417,12 +417,6 @@ void sceneRenderFrame() {
 	}
 
 	return;
-
-	//GOOD AIM!				[DONE]
-	//YOU FAIL IT :P
-	//#WINNING!
-	//UH...
-	//COFFEE BREAK QUEST
 }
 
 

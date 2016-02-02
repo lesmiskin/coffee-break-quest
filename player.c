@@ -112,6 +112,7 @@ void playerRenderFrame(void) {
 
 	//cup collision detection.
 	for(int j=0; j < MAX_CUPS; j++) {
+		if(cups[j].coord.x == 0) continue;
 		if(inBounds(cups[j].coord, makeSquareBounds(pos, 20))) {
 			cupCollision = true;
 			cups[j].coord.x = 0;
@@ -155,22 +156,28 @@ void playerRenderFrame(void) {
 
 void playerGameFrame(void) {
 	if(mode == MODE_COMBAT) {
+		//Dying.
 		if(health <= 0) {
 			changeMode(MODE_COMBAT_LOST);
 		}
 
+		//Moving around.
+		//NB: We still turn the player sprite where we can, even if we're hard
+		// up against a screen bound.
 		if (checkCommand(CMD_PLAYER_LEFT)) {
-			pos.x -= MOVE_INC;
+			if(pos.x > 0) pos.x -= MOVE_INC;
 			playerDir = false;
 		}
-
 		if (checkCommand(CMD_PLAYER_RIGHT)) {
-			pos.x += MOVE_INC;
+			if(pos.x < screenBounds.x) pos.x += MOVE_INC;
 			playerDir = true;
 		}
-
-		if (checkCommand(CMD_PLAYER_UP)) pos.y -= MOVE_INC;
-		if (checkCommand(CMD_PLAYER_DOWN)) pos.y += MOVE_INC;
+		if (checkCommand(CMD_PLAYER_UP) && pos.y > 0) {
+			pos.y -= MOVE_INC;
+		}
+		if (checkCommand(CMD_PLAYER_DOWN) && pos.y < screenBounds.y) {
+			pos.y += MOVE_INC;
+		}
 		if (checkCommand(CMD_PLAYER_FIRE)) shoot();
 
 		//Move the shots.
