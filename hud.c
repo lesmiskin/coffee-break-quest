@@ -112,12 +112,12 @@ void hudGameFrame(void) {
 }
 
 void hudRenderFrame(void) {
-	if(aggro && mode == MODE_COMBAT) {
+	if(aggro && currentMode == MODE_BREAK) {
 		writeText(health, makeCoord(50, 10));
 		writeFont("health", makeCoord(10, 10));
 	}
 
-	if(mode == MODE_OFFICE) {
+	if(currentMode == MODE_OFFICE) {
 		//Stat text.
 		writeText(alertness, makeCoord(75, 10));
 		writeText(hygiene, makeCoord(75, 20));

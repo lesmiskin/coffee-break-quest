@@ -80,7 +80,7 @@ bool onScreen(Coord coord, double threshold) {
 	));
 }
 
-bool hasWon(void) {
+bool wonCombat(void) {
 	//If any enemies are in the screen bounds - we've still got work to do!
 	for(int i=0; i < MAX_ENEMY; i++) {
 		if(enemies[i].coord.x == 0 && enemies[i].coord.y == 0) continue;
@@ -100,10 +100,10 @@ Coord randomDir(Coord coord) {
 }
 
 void enemyGameFrame(void) {
-	if(mode != MODE_COMBAT) return;
+	if(currentMode != MODE_BREAK) return;
 
 	//Everyone put offscreen? Then win.
-	if(hasWon()) {
+	if(aggro && wonCombat()) {
 		changeMode(MODE_COMBAT_WON);
 	}
 
@@ -117,7 +117,7 @@ void enemyGameFrame(void) {
 				enemies[i].coord.x -= step.x;
 				enemies[i].coord.y -= step.y;
 				enemies[i].state = STATE_ALARMED;
-				//aggro = true; // Messes with door collision in non-combat mode
+				//aggro = true; // Messes with door collision in non-combat currentMode
 			}
 		}
 
@@ -206,7 +206,7 @@ SDL_RendererFlip shouldFace(Enemy *enemy) {
 }
 
 void enemyNameRenderFrame(void) {
-	if(mode != MODE_COMBAT) return;
+	if(currentMode != MODE_BREAK) return;
 	for(int i=0; i < MAX_ENEMY; i++) {
 		if (enemies[i].coord.x == 0) continue;
 		Sprite nameSprite;
@@ -291,7 +291,7 @@ void enemyNameRenderFrame(void) {
 }
 
 void enemyShadowRenderFrame(void) {
-	if (mode != MODE_COMBAT) return;
+	if (currentMode != MODE_BREAK) return;
 
 	//Draw the enemies with the right animation frame.
 	for (int i = 0; i < MAX_ENEMY; i++) {
@@ -302,7 +302,7 @@ void enemyShadowRenderFrame(void) {
 }
 
 void enemyRenderFrame(void){
-	if(mode != MODE_COMBAT) return;
+	if(currentMode != MODE_BREAK) return;
 
 	//Draw the enemies with the right animation frame.
 	for(int i=0; i < MAX_ENEMY; i++) {

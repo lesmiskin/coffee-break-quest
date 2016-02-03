@@ -35,7 +35,7 @@ void pollInput(void) {
 
                 SDL_Keycode keypress = event.key.keysym.scancode;
 
-				switch(mode) {
+				switch(currentMode) {
 					case MODE_TITLE:
 						if(keypress == SDL_SCANCODE_SPACE)
 							changeMode(MODE_OFFICE_INTRO);
@@ -52,21 +52,21 @@ void pollInput(void) {
 						break;
 					case MODE_BREAK_OOPS:
 						if(keypress == SDL_SCANCODE_SPACE)
-							changeMode(MODE_COMBAT);
+							changeMode(MODE_BREAK);
 						break;
 					case MODE_OFFICE_INTRO:
 						if(keypress == SDL_SCANCODE_SPACE)
 							changeMode(MODE_OFFICE);
 						break;
 					case MODE_BREAK_INTRO:
-					case MODE_COMBAT_FIRSTTIME:
+					case MODE_COMBAT_INTRO:
 						if(keypress == SDL_SCANCODE_SPACE)
-							changeMode(MODE_COMBAT);
+							changeMode(MODE_BREAK);
 						break;
 				}
 
 				//Exit to title.
-				if(mode != MODE_TITLE) {
+				if(currentMode != MODE_TITLE) {
 					if(keypress == SDL_SCANCODE_ESCAPE)
 					changeMode(MODE_TITLE);
 				}
@@ -74,14 +74,14 @@ void pollInput(void) {
 				//Cheat for aggro test.
 //                     if(keypress == SDL_SCANCODE_X) {
 //					aggro = true;
-//					changeMode(MODE_COMBAT);
+//					changeMode(MODE_BREAK);
 //				}
             }
         }
     }
 
 	//Combat keys
-	if(mode == MODE_COMBAT) {
+	if(currentMode == MODE_BREAK) {
 		if(keysHeld[SDL_SCANCODE_LEFT])
 			commands[CMD_PLAYER_LEFT] = true;
 		else if(keysHeld[SDL_SCANCODE_RIGHT])
@@ -99,7 +99,7 @@ void pollInput(void) {
 
 	//Office keys
 	} else {
-		if(mode == MODE_OFFICE) {
+		if(currentMode == MODE_OFFICE) {
 			if(keysHeld[SDL_SCANCODE_D])
 				commands[CMD_PLAYER_DRINK] = true;
 			if(keysHeld[SDL_SCANCODE_B])

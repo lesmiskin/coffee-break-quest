@@ -97,14 +97,14 @@ void playerAnimateFrame(void) {
 }
 
 void playerShadowFrame(void) {
-	if(mode != MODE_COMBAT) return;
+	if(currentMode != MODE_BREAK) return;
 
 	Sprite shadow = makeSimpleSprite("shadow.png");
 	drawSprite(shadow, deriveCoord(pos, 0, 21));
 }
 
 void playerRenderFrame(void) {
-	if(mode != MODE_COMBAT) return;
+	if(currentMode != MODE_BREAK) return;
 
 	//Draw player.
 	Sprite player;
@@ -155,7 +155,7 @@ void playerRenderFrame(void) {
 }
 
 void playerGameFrame(void) {
-	if(mode == MODE_COMBAT) {
+	if(currentMode == MODE_BREAK) {
 		//Dying.
 		if(health <= 0) {
 			changeMode(MODE_COMBAT_LOST);

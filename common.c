@@ -13,13 +13,36 @@ double randomNo;
 double screenNo;
 double itemNo;
 double typeNo;
+bool sceneInited = false;
 
-GameMode mode = MODE_TITLE;
+GameMode currentMode = MODE_TITLE;
 
 void changeMode(GameMode newMode) {
-    mode = newMode;
+	sceneInited = false;
 
-    switch(mode) {
+	//Set the new currentMode.
+	GameMode lastMode = currentMode;
+	currentMode = newMode;
+
+	//Reinitialise meters if we're entering a new game.
+    if(lastMode == MODE_OFFICE_INTRO && currentMode == MODE_OFFICE) {
+		initOnceMeter();
+		initOnceScene();
+    }
+
+    //Refresh breaktime player health and enemy positions on currentMode change.
+    if(currentMode == MODE_BREAK) {
+        initPlayer();
+        initEnemy();
+    }
+
+    //Refresh scene data on change to a non-text scene.
+    if(currentMode == MODE_OFFICE || currentMode == MODE_BREAK) {
+		initScene();
+    }
+
+    //Play sounds.
+    switch(currentMode) {
         case MODE_OFFICE_WON:
         case MODE_COMBAT_WON:
         case MODE_TITLE:
@@ -32,15 +55,7 @@ void changeMode(GameMode newMode) {
             break;
     }
 
-
-    if(mode == MODE_OFFICE || mode == MODE_COMBAT) {
-        meterInit();
-        initPlayer();
-        initEnemy();
-        initScene();
-//    }else{
-//        mode = MODE_OFFICE;
-    }
+	sceneInited = true;
 }
 
 long ticsToMilliseconds(long tics) {

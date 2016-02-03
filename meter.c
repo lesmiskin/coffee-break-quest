@@ -8,7 +8,7 @@
 //Player needs drinking animation (grabs coffee, drinks, then puts back).
 //Player needs 'nearing break' animation (jiggling body).
 
-//Arcade mode: Fighting off other employees.
+//Arcade currentMode: Fighting off other employees.
 //Arcade combat:
 
 double alertness = 50;
@@ -24,7 +24,7 @@ const double SPEED_INC = 0.1;
 const double TIME_END = 480;
 const double SLOW_INC = 0.5;
 
-void meterInit() {
+void initOnceMeter() {
 	alertness = 50;
 	hygiene = 100;
 	work = 0;
@@ -46,9 +46,10 @@ void slowdown() {
 }
 
 void meterGameFrame(void) {
-	if(mode == MODE_OFFICE) {
+	if(currentMode == MODE_OFFICE) {
 		//Quit game once time is up.
 		if(timeProgress >= TIME_END) changeMode(MODE_OFFICE_LOST);
+
 		//Increment meters
 		timeProgress += (TIME_INC * timeRate);
 		bladder += (TIME_INC * timeRate * SLOW_INC);
@@ -66,7 +67,7 @@ void meterGameFrame(void) {
 		}
 		if (hygiene <= 0){
 			aggro = true;
-			changeMode(MODE_COMBAT_FIRSTTIME);
+			changeMode(MODE_COMBAT_INTRO);
 			hygiene = 40;
 		}
 		if (alertness <= 0) changeMode(MODE_OFFICE_LOST); //"YOU LOSE"

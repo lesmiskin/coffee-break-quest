@@ -5,13 +5,12 @@
 #include "input.h"
 #include "assets.h"
 #include "renderer.h"
-#include "scene.h"e
+#include "scene.h"
 #include "mysdl.h"
 #include "player.h"
 #include "meter.h"
 #include "hud.h"
 #include "enemy.h"
-
 
 static const char *GAME_TITLE = "Coffee Break Quest";
 const int ANIMATION_HZ = 1000 / 12;		//12fps
@@ -84,6 +83,8 @@ int main()  {
     initPlayer();
 	play("win.wav");
 
+	changeMode(MODE_TITLE);
+
     long lastRenderFrameTime = clock();
     long lastGameFrameTime = lastRenderFrameTime;
     long lastAnimFrameTime = lastRenderFrameTime;
@@ -111,13 +112,15 @@ int main()  {
         //Renderer frame
         double renderFPS;
         if(timer(&lastRenderFrameTime, RENDER_HZ)) {
-            sceneRenderFrame();
+            if(!sceneInited) continue;
+			sceneRenderFrame();
 			playerShadowFrame();
 			enemyShadowRenderFrame();
 			playerRenderFrame();
             enemyRenderFrame();
 			enemyNameRenderFrame();
 			hudRenderFrame();
+
             updateCanvas();
         }
     }

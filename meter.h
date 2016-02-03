@@ -7,7 +7,7 @@ extern double timeRate;
 extern double work;
 extern double bladder;
 extern double timeProgress;
-extern void meterInit();
+extern void initOnceMeter();
 
 extern void meterGameFrame(void);
 

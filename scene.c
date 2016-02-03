@@ -46,8 +46,8 @@ double coffeeInc = 0;
 bool textFlicker = false;
 
 void sceneAnimateFrame() {
-	switch(mode) {
-		case MODE_COMBAT_FIRSTTIME:
+	switch(currentMode) {
+		case MODE_COMBAT_INTRO:
 		case MODE_OFFICE_INTRO:
 		case MODE_TITLE:
 			titleAnim = titleAnim == 0 ? 1 : 0;
@@ -254,7 +254,7 @@ void officeFrame(void) {
 
 void sceneRenderFrame() {
 
-	switch(mode) {
+	switch(currentMode) {
 		case MODE_TITLE: {
 			Sprite carpet = makeSimpleSprite("carpet.png");
 			drawSprite(carpet, makeCoord(screenBounds.x/2, screenBounds.y/2));
@@ -306,14 +306,12 @@ void sceneRenderFrame() {
 			officeFrame();
 			break;
 
-		case MODE_COMBAT: {
+		case MODE_BREAK: {
 			Sprite sprite = makeSimpleSprite("carpet.png");
 			drawSprite(sprite, makeCoord(screenBounds.x / 2, screenBounds.y / 2));
 
 			for (int i = 0; i < MAX_PROPS; i++) {
-				//Hacky check for unset props.
-				if (props[i].sprite.size.y == 0 || props[i].sprite.texture == NULL) continue;
-
+				if (props[i].coord.x == 0) continue;
 				drawSprite(props[i].sprite, props[i].coord);
 			}
 			break;
@@ -350,7 +348,7 @@ void sceneRenderFrame() {
 			writeFont("press space to continue", makeCoord(113, 220));
 
 			break;
-		} case MODE_COMBAT_FIRSTTIME: {
+		} case MODE_COMBAT_INTRO: {
 			Sprite bg = makeSimpleSprite("carpet.png");
 			drawSprite(bg, makeCoord(screenBounds.x/2, screenBounds.y/2));
 
@@ -427,34 +425,47 @@ void sceneRenderFrame() {
 	return;
 }
 
-
-void initScene() {
+//Should happen once per-game (e.g. set time to 9am)
+void initOnceScene() {
 	minuteDeg = 0;
 	hourDeg = 270;
-	propInc = 0;
+}
 
-	if(mode == MODE_COMBAT) {
+//Should happen each time the scene is shown.
+void initScene() {
+	if(currentMode == MODE_BREAK) {
+		propInc = 0;
 
         for (int i = 0; i < MAX_PROPS; i++) {
             Sprite sprite;
-            if (!aggro && i == 6){
+
+			//Add door sprites at magic indexes for breaktime.
+			if (!aggro && i == 6){
                 sprite = makeSimpleSprite("doormale.png");
             }else if(!aggro && i==7){
                 sprite = makeSimpleSprite("doorfemale.png");
-            }else {
-                switch (randomMq(0, 6)) {
+
+			//Add usual random props.
+			}else {
+                switch (randomMq(0, 5)) {
                     case 0:
                         sprite = makeSimpleSprite("plant.png");
                         break;
                     case 1:
                         sprite = makeSimpleSprite("tree.png");
                         break;
+					case 2:
+						sprite = makeSimpleSprite("newtonscradle.png");
+						break;
+					case 3:
+						sprite = makeSimpleSprite("cat.png");
+						break;
+					case 4:
+						sprite = makeSimpleSprite("cactus.png");
+						break;
 //                case 2:
 //                    sprite = makeSimpleSprite("lamp.png");
 //                    break;
-                    case 2:
-                        sprite = makeSimpleSprite("newtonscradle.png");
-                        break;
 //				case 3:
 //					sprite = makeSimpleSprite("coffee.png");
 //					break;
@@ -464,12 +475,6 @@ void initScene() {
 //				case 6:
 //					sprite = makeSimpleSprite("clockon.png");
 //					break;
-                    case 3:
-                        sprite = makeSimpleSprite("cat.png");
-                        break;
-                    case 4:
-                        sprite = makeSimpleSprite("cactus.png");
-                        break;
                 }
             }
 			Prop prop = {

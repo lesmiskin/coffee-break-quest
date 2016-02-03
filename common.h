@@ -13,8 +13,7 @@ typedef enum {
 	MODE_BREAK_INTRO,
 	MODE_BREAK,
 	MODE_BREAK_OOPS,
-	MODE_COMBAT_FIRSTTIME,
-	MODE_COMBAT,
+	MODE_COMBAT_INTRO,
 	MODE_COMBAT_LOST,
 	MODE_COMBAT_WON,
 	MODE_OFFICE_INTRO,
@@ -28,12 +27,13 @@ typedef struct {
 	int width, height;
 } Rect;
 
+extern bool sceneInited;
 extern double typeNo;
 extern Rect makeRect(double x, double y, double width, double height);
 extern bool inBounds(Coord point, Rect area);
 extern Rect makeBounds(Coord origin, double width, double height);
 extern Rect makeSquareBounds(Coord origin, double size);
-extern GameMode mode;
+extern GameMode currentMode;
 extern void changeMode(GameMode newMode);
 extern SDL_Window *window;
 extern bool running;

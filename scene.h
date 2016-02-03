@@ -13,6 +13,7 @@ typedef struct {
     Coord coord;
 } Prop;
 
+extern void initOnceScene(void);
 extern void sceneRenderFrame(void);
 extern void sceneAnimateFrame(void);
 extern void initScene();
