@@ -18,3 +18,4 @@ make
 
 The project should be buildable on Windows and Mac with CMake and the SDL2 development libraries installed. CLion was used to develop the game, but is not required.
 
+ 
